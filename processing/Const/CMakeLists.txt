@@ -1,0 +1,5 @@
+set(Const_SRCS Const.cpp)
+qt4_automoc(${Const_SRCS})
+include_directories (${CMAKE_BINARY_DIR}/processing/Const)
+add_library(Const MODULE ${Const_SRCS})
+install(TARGETS Const DESTINATION processing)

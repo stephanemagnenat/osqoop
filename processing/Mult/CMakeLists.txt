@@ -1,0 +1,5 @@
+set(Mult_SRCS Mult.cpp)
+qt4_automoc(${Mult_SRCS})
+include_directories (${CMAKE_BINARY_DIR}/processing/Mult)
+add_library(Mult MODULE ${Mult_SRCS})
+install(TARGETS Mult DESTINATION processing)

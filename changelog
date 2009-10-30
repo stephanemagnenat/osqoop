@@ -1,0 +1,14 @@
+1.1.0:
+	- CMake release
+	- source code on gitorious
+	- added XYMode from contributor
+	
+1.0.0:
+	- New Sound Card data source (Unix OSS and Win32)
+	- New processing plugins (const, abs, mult, div, pow, delay, greater, generic 2nd order IIR)
+	- Correct handling of data sources of various input count
+	- Sampling rate and input count are dependent of a data source, not of its description
+	- Fixed helper behaviour
+
+0.9.0:
+	- first release

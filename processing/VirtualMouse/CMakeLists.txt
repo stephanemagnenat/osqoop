@@ -1,0 +1,5 @@
+set(VirtualMouse_SRCS VirtualMouse.cpp)
+qt4_automoc(${VirtualMouse_SRCS})
+include_directories (${CMAKE_BINARY_DIR}/processing/VirtualMouse)
+add_library(VirtualMouse MODULE ${VirtualMouse_SRCS})
+install(TARGETS VirtualMouse DESTINATION processing)

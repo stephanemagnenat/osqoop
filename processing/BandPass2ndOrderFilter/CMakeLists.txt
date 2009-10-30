@@ -1,0 +1,5 @@
+set(BandPass2ndOrderFilter_SRCS ProcessingBandPass2ndOrderFilter.cpp)
+qt4_automoc(${BandPass2ndOrderFilter_SRCS})
+include_directories (${CMAKE_BINARY_DIR}/processing/BandPass2ndOrderFilter)
+add_library(BandPass2ndOrderFilter MODULE ${BandPass2ndOrderFilter_SRCS})
+install(TARGETS BandPass2ndOrderFilter DESTINATION processing)

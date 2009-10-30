@@ -1,0 +1,93 @@
+<!DOCTYPE html
+     PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
+<link rel="stylesheet" href="osqoop.css" />
+<title>Osqoop, manuel de l'utilisateur</title>
+</head>
+<body>
+
+<div class="topbarsmall">
+<div class="innertopbar">
+<a href="user-manual-en.html">Anglais</a>
+--
+<a href="user-manual-fr.html#about">A propos</a>
+-
+<a href="user-manual-fr.html#install">Installation</a>
+-
+<a href="user-manual-fr.html#gui">Interface utilisateur</a>
+-
+<a href="user-manual-en.html#tips">Trucs et astuces</a>
+</div>
+</div>
+
+<a name="about"></a>
+
+<h1>Osqoop, manuel de l'utilisateur</h1>
+
+<h3>A propos</h3>
+
+<p>Osqoop est un oscilloscope logiciel acquérant ses données depuis des sources matérielles diverses, par exemple grâce à une carte son ou une carte dédiée sur USB. Il permet d'effectuer des traitement du signal en temps réel sur les signaux en cours d'acquisition. Osqoop est un logiciel sous licence libre basé sur la bibliothèque <a href="http://www.trolltech.com/products/qt/index.html">Qt 4</a>.</p>
+
+
+<h3><a name="install">Instructions d'installation</a></h3>
+
+<p>Si vous voulez seulement utiliser Osqoop (et ne pas développer pour), que vous utilisez Windows ou Ubuntu Dapper, le plus simple est de télécharger les distributions binaires depuis <a href="http://lsn.unige.ch/osqoop">notre site web</a>.</p>
+<p>Si vous voulez compiler Osqoop depuis les sources, veuillez suivre la <a href="http://lsn.unige.ch/osqoop/doc/dev">documentation pour les développeurs</a>. Ces pages sont générées depuis le code source et le contenu du répertoire docsource/ grâce à l'outil <a href="http://www.stack.nl/~dimitri/doxygen/">Doxygen</a>.</p>
+
+
+<h3><a name="gui">Découverte de l'interface utilisateur</a></h3>
+
+<p>Au premier lancement d'Osqoop, vous êtes invités à choisir une source de données. Une fois cette dernière choisie, l'écran principal d'Osqoop est affiché. Bien que plus simple (vous ne voyez que la vue principale), il ressemble à celui-ci:</p>
+<div class="gallery">
+<img src="images/osqoop_gui_fr.png" alt="osqoop_gui_fr.png" />
+</div>
+
+<h4>Échelle de temps et résolutions verticales</h4>
+<img src="images/osqoop_timescale_fr.png" class="floatleft"/>
+<img src="images/osqoop_voltage_fr.png" class="floatright"/>
+<p>En haut à gauche de la fenêtre principale, vous pouvez voir une boîte arrondie avec l'échelle de temps (la durée par division horizontale). A sa droite, une ligne de boîtes (une par canal) est affichée. Dans chaque boîte, si le canal est visible, la résolution verticale (la tension par division) est affichée. Un clic gauche affiche ou cache le canal. Un clic droite sur les boîtes des canaux (voir image à-droite) ou de l'échelle de temps (voir image à gauche) affiche un menu déroulant permettant de changer leurs valeurs.</p>
+<p>Ces deux opérations sont également accessibles à travers les menus "Canaux" et "Échelle de temps". L'accès par menu peut être utile, par exemple quand certaines boîtes de canaux sont cachées si la fenêtre n'est pas assez large.</p>
+
+<h4>Déplacer et renommer des canaux</h4>
+<p>Chaque canal visible possède, sur la côté gauche de la vue principale, un petit triangle indiquant la position du zéro. Si vous appuyez et maintenez le bouton gauche de la souris sur ce triangle, vous pouvez déplacer le canal verticalement. Pendant le déplacement, une ligne horizontale de la couleur du canal indique clairement sa position. Juste en dessus du triangle, le nom du canal est affiché. Si vous faites un clic gauche dessus, une boîte d'édition de texte s'affiche pour changer le nom du canal. Si vous pressez entrée, le nom du canal est modifié ; si vous cliquez ailleurs dans la fenêtre, l'ancien nom est conservé.</p>
+
+<h4>Trigger</h4>
+<img src="images/osqoop_trigger.png" class="floatleft"/>
+<p>Vous pouvez paramétrer un trigger sur n'importe quel flanc de n'importe quel canal. Le canal et le mode du trigger peuvent être configurés dans le menu "Trigger". Une fois que le trigger est actif sur un canal visible, il est affiché par une ligne horizontale (niveau) et verticale (temps) se croisant au point de trigger. Si vous appuyez et maintenez le bouton gauche de la souris sur ce point, vous pouvez modifier librement la position et la valeur du trigger.</p>
+
+<h4>Zoom</h4>
+<img src="images/osqoop_zoom.png" class="floatleft"/>
+<p>Osqoop possède un zoom. Pour zoomer, appuyez sur la touche Z ou activez le zoom par le menu "Affichage". Une fois le zoom actif, la partie inférieure de la fenêtre principale affiche la vue zoomée. De plus, vous pouvez définir le temps de départ du zoom avec un clic gauche dans la fenêtre principale et le temps de fin du zoom avec un clic droite.</p>
+<p>Ces temps sont indiqués par deux lignes grises verticales. Entre elles, la durée et la fréquence de la zone zoomée sont affichées dans une boîte. Si vous appuyez et maintenez le bouton gauche de la souris sur cette boîte, vous pouvez déplacer la vue zoomée.</p>
+
+<h4>Autres options d'affichage</h4>
+<p>Plusieurs options d'affichage supplémentaires sont disponibles dans le menu "Affichage" :
+<ul>
+<li>Geler : en activant cette option ou en appuyant sur la touche espace du clavier, la vue principale actuelle est gelée. Aucune autre acquisition n'est affichée jusqu'à ce que cette option soit désactivée ou que la touche espace du clavier soit appuyée à nouveau. Le processus d'acquisition continue en arrière plan.</li>
+<li>Ligne/Point : par défaut, Osqoop connecte ensemble par des lignes les points des données acquises. Il est possible de n'afficher que les points.</li>
+<li>Persistant/Effacement de la persistance : quand l'option persistant est activée, les vieilles données ne sont pas effacées avant que les nouvelles ne soient affichées. Ceci permet de visualiser les variations cumulées du signal. Si l'effacement de la persistance est activé, les vieilles données sont légèrement estompées avant que les nouvelles ne soient affichées, produisant un joli effet de flou. Cette option nécessite un ordinateur rapide.</li>
+<li>Anti-crénelage/Transparence : quand l'option anti-crénelage est activée, les lignes, le texte et les éléments géométriques sont dessinés avec un soin particulier qui enlève l'effet d'escalier dû aux pixels de l'écran. Quand la transparence est activée, les boîtes sont dessinées avec un fond translucide. Ces options, en particulier si elles sont combinées avec les précédentes, nécessitent un ordinateur très rapide.</li>
+</ul>
+</p>
+
+<h4>Impression et exportation des données</h4>
+<p>La vue principale peut être imprimée ou exportée en PDF (par exemple pour intégrer dans un rapport). Les données acquises (toutes ou celles qui sont affichées) peuvent être exportées en texte (par exemple pour les reprendre dans un logiciel de mathématique). Ces fonctionnalités sont accessibles par le menu "Fichier".</p>
+
+<h4>Plugins</h4>
+<img src="images/osqoop_configure_plugins_fr.png" class="floatleft"/>
+<p>Du traitement du signal peut être appliqué en temps réel sur les données acquises. Pour ce faire, des plugins sont utilisés. Quand les plugins sont activés, ils sont affichés dans une zone de paramètres des plugins sur la partie droite de la fenêtre principale (voir première capture d'écran). Il est ainsi possible de modifier les paramètres des plugins en temps réel. Pour charger et configurer les plugins, choisissez "Configurer" dans le menu "Plugin", ce qui affiche la boîte de dialogue de configuration des plugins (voire image à droite). Les configurations des plugins peuvent être sauvegardées et chargées par le menu "Plugin".</p>
+<p>La partie gauche de la boîte de dialogue de configuration des plugins contient une liste des plugins disponibles. Si vous laissez le curseur quelques instants sans bouger au dessus d'un plugin, une description détaillée est affichée. Si vous double-cliquez sur un plugin (ou que vous le sélectionnez et que vous appuyez sur "Utiliser"), le plugin apparaît dans la grille "Actifs".</p>
+<p>La grille "Actifs" possède une ligne par plugin actif. Pour chaque plugin actif, les entrées (I) et sorties (O) peuvent être changées en cliquant avec le bouton droite dans la cellule correspondante et en choisissant le canal. Par défaut, les canaux d'acquisitions sont nommés S<i>x</i> et les autres E<i>x</i>. Les cellules peuvent être vides si le plugin n'a pas assez d'entrées ou de sorties pour remplir totalement la largeur de la grille. Les deux petites flèches vertes servent à changer l'ordre d'application des plugins. La croix rouge permet d'enlever un plugin particulier de la zone des plugins actifs.</p>
+<p>Juste en dessous de la zone des plugins actifs, une boîte permet d'ajouter plus de canaux (ou d'enlever les inutilisés) pour le traitement du signal. Les canaux additionnels apparaissent en gris dans la vue principale.</p>
+
+<h3><a name="tips">Trucs et astuces</a></h3>
+<ul>
+<li>La partie d'Osqoop consommant le plus de temps CPU est l'affichage. Le traitement du signal, sur un ordinateur moderne, coûte relativement peu. Ainsi, si vous désirez utiliser Osqoop dans une application interfaçant des périphériques du monde réel ; et que le meilleur temps-réel possible est requis, il est fortement conseillé de réduire la fenêtre d'Osqoop.</li>
+<li>Si la résolution verticale d'un canal est trop faible, il ne pourra être déplacé verticalement que par larges pas, à cause de la précision limitée des signaux (16 bits).</li>
+<li>Sous Unix, si vous avez utilisé Osqoop avec la carte d'acquisition USB TseAdExt, vous devez débrancher et rebrancher la carte USB avant de relancer Osqoop si vous désirez à nouveau utiliser cette carte.</li>
+</ul>
+</body>
+</html>

@@ -1,0 +1,5 @@
+add_definitions(-DQT_PLUGIN)
+include_directories (${CMAKE_SOURCE_DIR}/src)
+add_subdirectory(VariousSinus)
+add_subdirectory(SoundCard)
+add_subdirectory(TseAdExt)

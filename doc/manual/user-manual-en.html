@@ -1,0 +1,94 @@
+<!DOCTYPE html
+     PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
+<link rel="stylesheet" href="osqoop.css" />
+<title>Osqoop User manual</title>
+</head>
+<body>
+
+<div class="topbarsmall">
+<div class="innertopbar">
+<a href="user-manual-fr.html">French</a>
+--
+<a href="user-manual-en.html#about">About</a>
+-
+<a href="user-manual-en.html#install">Install</a>
+-
+<a href="user-manual-en.html#gui">GUI</a>
+-
+<a href="user-manual-en.html#tips">Tips and tricks</a>
+</div>
+</div>
+
+<a name="about"></a>
+
+<h1>Osqoop User Manual</h1>
+
+<h3>What is Osqoop</h3>
+
+<p>Osqoop is a multi-platform open source software oscilloscope based on <a href="http://www.trolltech.com/products/qt/index.html">Qt 4</a>. It connects to various hardware data sources such as the sound input or a dedicated USB board. Osqoop provides real-time signal processing through a plugin architecture.</p>
+
+
+<h3><a name="install">Installation instructions</a></h3>
+
+<p>If you only want to use Osqoop (not develop for it) and are running Windows or Ubuntu Dapper, feel free to download the binary distributions from <a href="http://lsn.unige.ch/osqoop">our website</a>.</p>
+<p>If you want to compile Osqoop from sources, please follow the <a href="http://lsn.unige.ch/osqoop/doc/dev">developers documentation</a>. Those pages are generated from source code and content of docsource/ directory using the <a href="http://www.stack.nl/~dimitri/doxygen/">Doxygen</a> tool.</p>
+
+
+<h3><a name="gui">Discovering user interface</a></h3>
+
+<p>When first starting Osqoop, you are prompted for a data source. Once the data source is chosen, the Osqoop main screen is shown. It looks a bit like this, although simpler (you only see the main view):</p>
+<div class="gallery">
+<img src="images/osqoop_gui_en.png" alt="osqoop_gui_en.png" />
+</div>
+
+<h4>Time scale and vertical resolution</h4>
+<img src="images/osqoop_timescale_en.png" class="floatleft"/>
+<img src="images/osqoop_voltage_en.png" class="floatright"/>
+<p>In the top left of the main view, a rounded box with the time scale (the amount of time per horizontal division) is visible. Next right to it, a line of boxes (one per channel) is show. On each box, if the channel is visible, the vertical resolution (as the amount of voltage per vertical division) is displayed. Left clicking on a channel box toggles the channel visible and hidden. Right clicking on the time scale (see picture at left) or on a channel (see picture at right) box displays a drop-down menu to change their values.</p>
+<p>Both those operations are also accessible through the "Channel" and "Timescale" main menus. This can be usefull, for instance when the channels boxes are hidden because the window is not wide enough.</p>
+
+<h4>Moving and renaming channels</h4>
+<p>Each visible channel has a small triangle at left of main view showing the position of the zero. If you press and hold the left mouse button on this triangle, you can move the channel vertically. While moving, a horizontal line of the channel color is displayed in order to clearly show the channel position. Right upper the triangle, the name of the channel is shown. If you left click on it, an edit box is displayed to change the channel's name. If you press enter, the name of the channel is changed. If you click somewhere else, the old name is kept.</p>
+
+<h4>Trigger</h4>
+<img src="images/osqoop_trigger.png" class="floatleft"/>
+<p>You can set a trigger on any edge of any channel. The trigger mode and channel can be set through the "Trigger" menu. Once a trigger is active on a visible channel, it is displayed as a horizontal line (level) and vertical line (time) crossing at the trigger point. If you press and hold the left mouse button on that point, you can freely move the time and value of the trigger.</p>
+
+<h4>Zoom</h4>
+<img src="images/osqoop_zoom.png" class="floatleft"/>
+<p>Osqoop has an integrated zoom. To zoom, press the Z key or activate zoom through the "Display" menu. When zoom is activated, the bottom part of the window displays the zoomed view. Furthermore, you can set the zoom start time by left clicking in the main view and set the zoom end time by right clicking in the main view. Those two times are indicated by vertical grey lines. Between them, a zoom info box shows the duration and the frequency of the zoomed view. If you press and hold the left mouse button in this box, you can drag the zoomed view.</p>
+
+<h4>Other display options</h4>
+<p>Several additional display options are available in the "Display" menu:
+<ul>
+<li>Freeze: by setting this option or pressing the space key, the current main view is freezed. That means that no other acquisition is done until this option is unset or the space key is pressed again. Acquisition process continues in the background.</li>
+<li>Line/Point: by default, Osqoop links acquired data points with lines. With this option, it is possible to display only points.</li>
+<li>Persistent/Persistence fadeout: when persistant option is set, old data are not erased before new ones are displayed. This allows for the visualisation of accumulated signal variations. If persistence fadeout is set, old data are slightly faded out before new ones are displayed, producing a cute motion blur effect. Those options require a fast computer.</li>
+<li>Antialiasing/Alpha blending: When antialiasing is set ; lines, text and geometry elements are drawn with high-quality rendering that removes aliasing effects of screen pixels. When alpha blending is set ; boxes are drawn semi-transparent. Those options, especially when combined with previous ones, require a very fast computer.</li>
+</ul>
+</p>
+
+<h4>Printing and exporting data</h4>
+<p>Main view can be printed or exported to PDF (suitable for printing in a report). Acquired data (all or only displayed ones) can be exported as text (suitable for loading in a math software). Data printing and export is accessible through the "File" menu.</p>
+
+<h4>Plugins</h4>
+<img src="images/osqoop_configure_plugins_en.png" class="floatleft"/>
+<p>Signal processing can be applied on acquired data in real-time. This is done through plugins. When plugins are activated, they are displayed in a plugin parameter area at the right side of the main view as show in the screenshot above. It is thus possible to change plugins parameters in real time. To load and configure plugins, select "Configure" in the "Plugin" menu, which displays the plugin configuration dialog box. Plugins configurations can also be saved and reloaded through the "Plugin" menu.</p>
+<p>The left side of the plugin configuration dialog box contains a list of available plugins. If you let the cursor still for a while over a plugin, a detailed description is shown in a tooltip. If you double-click on a plugin (or select it and click "Use"), the plugin appears in the "Active" grid.</p>
+<p>The "Active" grid has one line per active plugin. For each active plugin, the inputs (I) and outputs (O) can be changed by right clicking on the corresponding cell and choosing the channel. By default, acquisition channels are named S<i>x</i> while others are named E<i>x</i>. Cells can be empty if the plugin doesn't have enough input or output channels to fill the whole grid width. The two small green arrows can be used to change the order of plugins application. The red cross can be used to remove a specific plugin from the active area.</p>
+<p>Right under the active plugins area, a spin-box can be used to add more channels (or remove unused ones) for signal processing. The additional channels appear in grey in the main view.</p>
+
+
+<h3><a name="tips">Tips and tricks</a></h3>
+<ul>
+<li>The most CPU-time consuming part of Osqoop is the display. Signal processing, on a modern computer, is reasonably inexpensive. So if you use Osqoop as a controller for a real-world device and want to achieve the best possible real-time on a desktop PC, reduce Osqoop's main window.</li>
+<li>If the vertical resolution of a channel is too small, it could only be vertically moved by large steps, because of the limited signals precision (16 bits).</li>
+<li>Under Unix, if you have run Osqoop with the TseAdExt USB acquisition board and quit, you need to unplug and replug the USB board before running Osqoop again.</li>
+</ul>
+
+</body>
+</html>

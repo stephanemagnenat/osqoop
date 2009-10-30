@@ -1,0 +1,18 @@
+Source: osqoop
+Maintainer: Stephane Magnenat <stephane@magnenat.net>
+Section: science
+Priority: optional
+Standards-Version: 3.7.2
+Build-Depends: libqt4-dev,libusb-dev,debhelper (>= 5),cmake (>= 2.6)
+
+Package: osqoop
+Architecture: any
+Depends: ${shlibs:Depends},fxload
+Description: An open source software oscilloscope written in Qt4.
+ Osqoop features an arbitrary number of channels. Data sources and
+ signal processing functions are available as plugins.
+ Osqoop comes with three data sources: the soundcard, a virtual
+ sinus source and a external 8 channel USB source based on a Cypress
+ FX2 chip.
+ This package also include a fair basic set of signal processing
+ plugins.

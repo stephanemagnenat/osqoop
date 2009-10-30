@@ -1,0 +1,30 @@
+Stephane Magnenat <stephane at magnenat dot net>
+Laboratory of Digital Systems http://www.eig.ch/labsynum.htm
+Engineering School of Geneva http://www.eig.ch
+- Osqoop design, implementation and documentation
+- Data sources
+- Filters
+
+Lucas Tamarit <lucas dot tamarit at gmail dot com>
+Laboratory of Signal Processing http://eig.unige.ch/~kocher/
+Engineering School of Geneva http://www.eig.ch
+- Filters (TSELucas, IIR and BandPass2ndOrder)
+
+Antoine Beyeler <antoine dot beyeler at epfl dot ch>
+Laboratory of Intelligent Systems http://lis.epfl.ch
+EPFL, Lausanne http://www.epfl.ch
+- Backpropagation neural network
+- Stroustrup-approved matrix
+
+Philip VanBaren
+- Integer FFT for real valued number
+
+Bharathwaj "Bart Simpson" Muthuswamy
+EE Ph.D. Student
+Nonlinear Electronics Lab (NOEL)
+http://nonlinear.eecs.berkeley.edu
+Connectivity Lab
+http://connectivitylab.eecs.berkeley.edu
+EECS Department
+University of California, Berkeley
+- XYMode

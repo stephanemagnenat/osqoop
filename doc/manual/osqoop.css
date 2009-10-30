@@ -1,0 +1,99 @@
+body {
+	margin-top: 0px;
+}
+
+div.gallery {
+	text-align: center;
+	margin:0px auto;
+}
+
+div.topbar {
+	position: fixed;
+	top: 0px;
+	width: 100%;
+	min-height: 2em;
+	background-color: #ffffff;
+	border-bottom: 1px solid #000000;
+	text-align: center;
+	display: table-cell;
+}
+
+div.topbarsmall {
+	position: fixed;
+	top: 0px;
+	width: 100%;
+	min-height: 1em;
+	background-color: #ffffff;
+	border-bottom: 1px solid #000000;
+	text-align: center;
+	display: table-cell;
+}
+
+div.dlentry {
+	margin: 10px;
+	width: 120px;
+	display:inline-table;
+	text-align: center;
+	padding: 10px;
+	float: left;
+}
+
+div.innertopbar {
+	vertical-align: middle;
+}
+
+p.dlentrydescr {
+	color: rgb(64, 64, 64);
+	padding: 0px;
+	margin: 5px;
+	margin-top: 10px;
+}
+
+p.dlentrysubdescr {
+	color: rgb(128, 128, 128);
+	padding: 0px;
+	margin: 0px;
+}
+
+h3, h4 {
+	text-align: center;
+	clear: both;
+}
+
+h1 {
+	text-align: center;
+	padding-top: 50px;
+	margin-top: 0px;
+}
+
+h2.warning {
+	color: red;
+	text-align: center;
+}
+
+a:link, a:visited, a:active {
+	text-decoration: none;
+}
+
+a:hover {
+	text-decoration: underline;
+}
+
+img {
+	border: 0px;
+}
+
+img.floatleft {
+	border: 0px;
+	margin-right: 10px;
+	margin-bottom: 10px;
+	float: left;
+}
+
+img.floatright {
+	border: 0px;
+	margin-left: 10px;
+	margin-bottom: 10px;
+	float: right;
+}
+

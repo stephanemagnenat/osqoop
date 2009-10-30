@@ -1,0 +1,5 @@
+set(EMGMouseBackpropNNClassifier_SRCS EMGMouseBackpropNNClassifier.cpp)
+qt4_automoc(${EMGMouseBackpropNNClassifier_SRCS})
+include_directories (${CMAKE_BINARY_DIR}/processing/EMGMouseBackpropNNClassifier)
+add_library(EMGMouseBackpropNNClassifier MODULE ${EMGMouseBackpropNNClassifier_SRCS})
+install(TARGETS EMGMouseBackpropNNClassifier DESTINATION processing)

@@ -1,0 +1,5 @@
+set(Delay_SRCS Delay.cpp)
+qt4_automoc(${Delay_SRCS})
+include_directories (${CMAKE_BINARY_DIR}/processing/Delay)
+add_library(Delay MODULE ${Delay_SRCS})
+install(TARGETS Delay DESTINATION processing)

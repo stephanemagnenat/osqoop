@@ -1,0 +1,8 @@
+<!DOCTYPE RCC><RCC version="1.0">
+    <qresource>
+        <file>images/up.png</file>
+        <file>images/down.png</file>
+        <file>images/delete.png</file>
+        <file>osqoop_fr.qm</file>
+    </qresource>
+    </RCC>

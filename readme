@@ -1,0 +1,11 @@
+Osqoop
+------
+
+How to find information :
+- compilation: look at CMake documentation
+- end user documentation: doc/manual
+- developer documentation: doc/dev
+- complete list of contributors: authors
+- list of changes: changelog
+- software license: license
+

@@ -1,0 +1,6 @@
+if (LibUSB_FOUND)
+	include_directories(${LibUSB_INCLUDE_DIRS})
+	add_executable(osqoop-setupfx2 setupfx2.c)
+	target_link_libraries(osqoop-setupfx2 ${LibUSB_LIBRARIES})
+	install(TARGETS osqoop-setupfx2 DESTINATION .)
+endif (LibUSB_FOUND)

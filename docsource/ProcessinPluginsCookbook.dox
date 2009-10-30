@@ -1,0 +1,231 @@
+/*!
+
+\page ProcessingPluginsCookbook Processing Plugins Cookbook
+
+This page will teach you how to create a new signal processing plugin.
+
+\section Overview
+
+A processing plugin must inherit from the ProcessingPlugin abstract class and provide a description inherited from the ProcessingPluginDescription class. The description class is the plugin dynamic library entry point and provides general informations about the plugin such as the number of inputs and outputs, its name and system name, as well as its helper text. For each plugin, a single instance of description will always exist in memory while the plugin library is loaded. The plugin itself is created by the description using the create() method and thus must have a private constructor. Zero or more instances of the plugin may exist in memory at a given time.
+
+\code
+class ProcessingPluginDescription
+{
+public:
+	virtual QString systemName() const;
+	virtual QString name() const;
+	virtual QString description() const;
+	virtual unsigned inputCount() const;
+	virtual unsigned outputCount() const;
+	virtual ProcessingPlugin *create() const;
+};
+\endcode
+\code
+class ProcessingPlugin
+{
+public:
+	virtual QWidget *createGUI(void);
+	virtual void processData(const std::valarray<signed short *> &inputs, const std::valarray<signed short *> &outputs, unsigned sampleCount);
+	virtual void terminate(void);
+};
+\endcode
+
+\section Simple A simple example: a signal inverter
+
+We will now create a simple plugin that return the invert (-x) of the input signal at each timestep. This plugin will be named Negate, in reference to the mathematical operation. The full documented source code of this plugin can be found in processing/Negate/.
+
+\subsection CreatingFiles Creating the directory and files
+
+We first need to create the directory and files for our plugin. We create a new directory, processing/Negate/, in which we add the following three files:
+
+\b Negate.pro
+\verbatim
+TEMPLATE      = lib
+CONFIG       += plugin
+INCLUDEPATH  += ../../src
+HEADERS       = Negate.h
+SOURCES       = Negate.cpp
+TARGET        = Negate
+DESTDIR       = ../../target/processing
+\endverbatim
+
+\b Negate.h
+\code
+#ifndef __PROCESSING_Negate
+#define __PROCESSING_Negate
+
+// code will go here
+
+#endif
+\endcode
+
+\b Negate.cpp
+\code
+#include <QtCore>
+#include "Negate.h"
+
+// code will go here
+\endcode
+
+In addition, we modify processing/Plugins.pro in order to add our new directory, Negate, to the list of SUBDIRS. We then need to run qmake in the processing/ and processing/Negate/ directories. More documentation on the build system can be found in the qmake manual (http://doc.trolltech.com/4.0/qmake-manual.html).
+
+\subsection CreatingDescription Creating the description
+
+We now have to create the plugin description. We write the class definition in Negate.h:
+\code
+class ProcessingNegateDescription : public QObject, public ProcessingPluginDescription
+{
+	Q_OBJECT
+	Q_INTERFACES(ProcessingPluginDescription)
+
+public:
+	QString name() const;
+	QString description() const;
+	unsigned inputCount() const;
+	unsigned outputCount() const;
+	ProcessingPlugin *create() const;
+};
+\endcode
+
+And implement it in Negate.cpp:
+\code
+QString ProcessingNegateDescription::systemName() const
+{
+	return QString("Negate");
+}
+
+QString ProcessingNegateDescription::name() const
+{
+	return QString("Negate");
+}
+
+QString ProcessingNegateDescription::description() const
+{
+	return QString("Return -x");
+}
+
+unsigned ProcessingNegateDescription::inputCount() const
+{
+	return 1;
+}
+
+unsigned ProcessingNegateDescription::outputCount() const
+{
+	return 1;
+}
+
+ProcessingPlugin *ProcessingNegateDescription::create() const
+{
+	return new ProcessingNegate(this);
+}
+
+Q_EXPORT_PLUGIN(ProcessingNegateDescription)
+\endcode
+
+All methods return informations about the plugin excepted create() which returns a new instance of the plugin, passing a pointer to its description as the parameter of the constructor. The systemName() method must return a string which does not contain any white space in the sens of Qt QChar::isSpace().
+
+As the description is the entry point of the Qt dynamic library loading system, the description has to be a QObject and declare its plugin interface using the Q_INTERFACES macro. In addition, the plugin has to be registered using the Q_EXPORT_PLUGIN macro in the cpp.
+
+\subsection CreatingPlugin Creating the plugin itself
+
+The only thing left to do is to create the plugin itself. We write the class definition in Negate.h:
+\code
+class ProcessingNegate : public ProcessingPlugin
+{
+private:
+	friend class ProcessingNegateDescription;
+	ProcessingNegate(const ProcessingPluginDescription *description) : ProcessingPlugin(description) { }
+
+public:
+	void processData(const std::valarray<signed short *> &inputs, const std::valarray<signed short *> &outputs, unsigned sampleCount);
+};
+\endcode
+
+And implement it in Negate.cpp:
+\code
+void ProcessingNegate::processData(const std::valarray<signed short *> &inputs, const std::valarray<signed short *> &outputs, unsigned sampleCount)
+{
+	signed short *srcPtr = inputs[0];
+	signed short *destPtr = outputs[0];
+	for (unsigned sample = 0; sample < sampleCount; sample++)
+		*destPtr++ = - (*srcPtr++);
+}
+\endcode
+
+The constructor is private to ensure that only the description can create the plugin. This enforces that the plugin always has a valid pointer to its interface.
+
+All the processing is done in the processData method. This method receives two valarrays of pointers, one for inputs and the other for outputs. Each element of the valarray is a pointer to the datas of the corresponding channel. There is sampleCount samples per channel.
+
+As the plugin has no GUI, it is not necessary to reimplement ProcessingPlugin::createGUI(). ProcessingPlugin::terminate() is already implemented and just call delete(this).
+
+
+\section Advance An advanced example: a variable gain controller
+
+We will now create a more advanced plugin, featuring a GUI. This plugin is a variable gain controller (x*gain), changeable by the user through a graphical slider. The full documented source code of this plugin can be found in processing/Gain/.
+
+\subsection AddingAGUI Adding a GUI
+
+All the first steps are the same as in the previous example and will thus not be repeated.
+
+The plugin now also inherits from QObject in order to add slots to it:
+\code
+class ProcessingGain : public QObject, public ProcessingPlugin
+{
+	Q_OBJECT
+\endcode
+
+The plugin also got a member, the gain:
+\code
+private:
+	int gain;
+\endcode
+
+This gain must be changeable by the GUI, so it is settable through a slot:
+\code
+private slots:
+	void gainChanged(int);
+\endcode
+whose implementation is:
+\code
+void ProcessingGain::gainChanged(int value)
+{
+	gain = value;
+}
+\endcode
+
+As we set only a single integer that can be changed anytime during processData, we don't need any protection. But, if we had a more complex structure, we would need a mutex to protect concurent accesses from both the processing (calling processData) and the GUI (calling slots) threads.
+
+Then, the GUI itself must be created. Once created, the GUI is managed by the caller so the plugin does not need to take care of destroying it. GUI creation is done by the createGUI method:
+\code
+QWidget *createGUI(void);
+\endcode
+whose implementation is:
+\code
+QWidget *ProcessingGain::createGUI(void)
+{
+	QSlider *slider = new QSlider(Qt::Horizontal);
+	slider->setRange(0, 100);
+	slider->setValue(gain);
+	connect(slider, SIGNAL(valueChanged(int)), SLOT(gainChanged(int)));
+	return slider;
+}
+\endcode
+Note that the GUI is connected to the plugin using the Qt signal/slot mechanism.
+
+When plugins inherit from QObject, they can receive events asynchronously. It is thus not correct anymore to delete them directly. Instead, QObject::deleteLater must be called. This is done by reimplementing the terminate() method:
+\code
+void terminate(void) { deleteLater(); }
+\endcode
+
+Finally, the code of the signal processing is quite trivial:
+\code
+void ProcessingGain::processData(const std::valarray<signed short *> &inputs, const std::valarray<signed short *> &outputs, unsigned sampleCount)
+{
+	signed short *srcPtr = inputs[0];
+	signed short *destPtr = outputs[0];
+	for (unsigned sample = 0; sample < sampleCount; sample++)
+		*destPtr++ = (short)((gain * (int)(*srcPtr++)) / 10);
+}
+\endcode
+
+*/

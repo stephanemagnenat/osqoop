@@ -1,0 +1,4 @@
+#!/bin/sh
+# to be run in the install directory 
+chown root.root osqoop-setupfx2
+chmod +s osqoop-setupfx2

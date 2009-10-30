@@ -1,0 +1,175 @@
+/*!
+
+\page DataSourceCookbook Data Source Cookbook
+
+This page will teach you how to create a new data sources.
+
+\section Overview
+
+A data source plugin must inherit from the DataSource abstract class and provide a description inherited from the DataSourceDescription class. The description class is the data source dynamic library entry point and provides general informations about the data source such as its name and helper text. For each data source, a single instance of description will always exist in memory while the data source library is loaded. The data source itself is created by the description using the create() method and thus must have a private constructor. 
+
+\code
+class DataSourceDescription
+{
+public:
+	virtual QString name() const;
+	virtual QString description() const;
+	
+	virtual ProcessingPlugin *create() const;
+};
+\endcode
+\code
+class DataSource
+{
+public:
+	virtual bool init();
+	virtual unsigned getRawData(std::valarray<std::valarray<signed short> > *data);
+	virtual unsigned inputCount() const;
+	virtual unsigned samplingRate() const;
+};
+\endcode
+
+\section Example A Data source example
+
+We will now create a simple data source that generates sinus of various frequencies from 100 to 800 Hz. It will be named VariousSinus. The full documented source code of this data source can be found in datasource/VariousSinus/.
+
+\subsection CreatingFiles Creating the directory and files
+
+We first need to create the directory and files for our plugin. We create a new directory, datasource/VariousSinus/, in which we add the following three files:
+
+\b VariousSinus.pro
+\verbatim
+TEMPLATE      = lib
+CONFIG       += plugin
+INCLUDEPATH  += ../../src
+HEADERS       = VariousSinus.h
+SOURCES       = VariousSinus.cpp
+TARGET        = VariousSinus
+DESTDIR       = ../../target/datasource
+\endverbatim
+
+\b VariousSinus.h
+\code
+#ifndef __VARIOUS_SINUS_H
+#define __VARIOUS_SINUS_H
+
+// code will go here
+
+#endif
+\endcode
+
+\b VariousSinus.cpp
+\code
+#include <QtCore>
+#include "VariousSinus.h"
+
+// code will go here
+\endcode
+
+In addition, we modify datasource/DataSource.pro in order to add our new directory, VariousSinus, to the list of SUBDIRS. We then need to run qmake in the datasource/ and datasource/VariousSinus/ directories. More documentation on the build system can be found in the qmake manual (http://doc.trolltech.com/4.1/qmake-manual.html).
+
+\subsection CreatingDescription Creating the description
+
+We now have to create the data source description. We write the class definition in VariousSinus.h:
+\code
+class VariousSinusDataSourceDescription : public QObject, public DataSourceDescription
+{
+	Q_OBJECT
+	Q_INTERFACES(DataSourceDescription)
+
+public:
+	virtual QString name() const;
+	virtual QString description() const;
+	virtual DataSource *create() const;
+};
+\endcode
+
+And implement it in VariousSinus.cpp:
+\code
+QString VariousSinusDataSourceDescription::name() const
+{
+	return "Various sinus generator";
+}
+
+QString VariousSinusDataSourceDescription::description() const
+{
+	return "A simple sinus generator of various frequencies";
+}
+
+DataSource *VariousSinusDataSourceDescription::create() const
+{
+	return new VariousSinusDataSource(this);
+}
+
+Q_EXPORT_PLUGIN(VariousSinusDataSourceDescription)
+\endcode
+
+All methods return informations about the data source excepted create() which returns a new instance of the data source, passing a pointer to its description as the parameter of the constructor.
+
+As the description is the entry point of the Qt dynamic library loading system, the description has to be a QObject and declare its plugin interface using the Q_INTERFACES macro. In addition, the plugin has to be registered using the Q_EXPORT_PLUGIN macro in the cpp.
+
+\subsection CreatingDataSource Creating the data source itself
+
+The only thing left to do is to create the data source itself. We write the class definition in VariousSinus.h:
+\code
+class VariousSinusDataSource : public DataSource
+{
+private:
+	friend class VariousSinusDataSourceDescription;
+	VariousSinusDataSource(const DataSourceDescription *description);
+	double t; //!< time
+
+public:
+	virtual unsigned getRawData(std::valarray<std::valarray<signed short> > *data);
+	virtual bool init(void) { return true; }
+	virtual unsigned inputCount() const;
+	virtual unsigned samplingRate() const;
+    virtual unsigned unitPerVoltCount() const;
+};
+\endcode
+
+And implement it in VariousSinus.cpp:
+\code
+VariousSinusDataSource::VariousSinusDataSource(const DataSourceDescription *description) :
+	DataSource(description)
+{
+	t = 0;
+}
+
+unsigned VariousSinusDataSource::getRawData(std::valarray<std::valarray<signed short> > *data)
+{
+	for (size_t sample = 0; sample < 512; sample++)
+	{
+		for (size_t channel = 0; channel < 8; channel++)
+		{
+			(*data)[channel][sample] = (signed short)(1000.0 * sin( (t * 2 * M_PI) / (100 * (double)(channel + 1)) ));
+		}
+		t++;
+	}
+	return 1000000 / (10000 / 512);
+}
+
+unsigned VariousSinusDataSource::inputCount() const
+{
+	return 8;
+}
+
+unsigned VariousSinusDataSource::samplingRate() const
+{
+	return 10000;
+}
+
+unsigned VariousSinusDataSource::unitPerVoltCount() const
+{
+    return 1000;
+}
+
+\endcode
+
+The constructor is private to ensure that only the description can create the data source. This enforces that the data source always has a valid pointer to its interface.
+
+The data source constructor initializes the time to zero. Then, at each call to getRawData(), the signal values for a period of 512 samples are computed for each channel. This method receives a valarray of pointers. Each element of the valarray is a valarray of 512 samples to be filled with the data datas of the corresponding channel. The getRawData() method returns the elapsed time in microseconds. The DataConverter will wait this time. If 0 is returned, the DataConverter will not wait. The number of channel passed to getRawData() is the one returned by inputCount().
+
+Finally, to get a fully functionnal data source, samplingRate() must return the correct sampling rate in samples per second and unitPerVoltCount() must return the value of 1V on an input.
+
+*/

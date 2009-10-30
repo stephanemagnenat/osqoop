@@ -1,0 +1,11 @@
+osqoop (1.1.0) karmic; urgency=low
+
+  * Updated upstream release
+
+ -- Stéphane Magnenat <stephane at magnenat dot net>  Tue, 27 Oct 2009 18:06:43 +0100
+
+osqoop (1.0.0) dapper; urgency=low
+
+  * Initial release.
+
+ -- Stephane Magnenat <stephane at magnenat dot net>  Fri,  8 Sep 2006 17:30:39 +0200
