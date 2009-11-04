@@ -1218,6 +1218,8 @@ void OscilloscopeWindow::loadPlugins()
 					if (iProcessingDescription)
 						processingPluginsDescriptions.push_back(iProcessingDescription);
 				}
+				else
+					qDebug() << "Processing plugin " << fileName << " failed to load: " << loader.errorString();
 			}
 			pluginsDir.cd("..");
 		}
@@ -1233,6 +1235,8 @@ void OscilloscopeWindow::loadPlugins()
 					if (iDataSourceDescription)
 						dataSourceDescriptions.push_back(iDataSourceDescription);
 				}
+				else
+					qDebug() << "Datasource plugin " << fileName << " failed to load: " << loader.errorString();
 			}
 			pluginsDir.cd("..");
 		}
