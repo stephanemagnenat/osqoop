@@ -1,0 +1,5 @@
+set(Dds_SRCS Dds.cpp)
+qt4_automoc(${Dds_SRCS})
+include_directories (${CMAKE_BINARY_DIR}/datasource/Dds)
+add_library(Dds MODULE ${Dds_SRCS})
+install(TARGETS Dds DESTINATION share/osqoop/datasource)
