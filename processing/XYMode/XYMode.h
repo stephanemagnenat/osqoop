@@ -39,7 +39,6 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #include <QPoint>
 #include <QtGui>
 #include <QList>
-#include <QMainWindow>
 #include <QString>
 
 //! Description of XYMode plugin
@@ -57,23 +56,26 @@ public:
 	ProcessingPlugin *create(const DataSource *dataSource) const;
 };
 
+
+
 /**** This class is a custom widget for displaying XY Mode
 Designed by Bharathwaj Muthuswamy following instructions by Stephane Magnenat
 Reference: http://doc.trolltech.com/4.2/widgets-scribble.html
 If you instantiate this class, you will create a new window for XY mode. 
 ***/
+
 class XYModeGUI : public QWidget
 {
 	Q_OBJECT
-
 public:
 	XYModeGUI(QWidget *parent = 0);
 	short *xData,*yData;
 	unsigned sampleCount;
 	double yPrescaleFactor;
 	double xPrescaleFactor;
-	double xTranslationFactor;
-	double yTranslationFactor;
+	double xOffset;
+	double yOffset;
+	int penWidth;
 
 protected:
 	void paintEvent(QPaintEvent *event);
@@ -101,16 +103,18 @@ public:
 private slots:
 	void yPrescaleFactorChanged(double);
 	void xPrescaleFactorChanged(double);
-	void xTranslationFactorChanged(double);
-	void yTranslationFactorChanged(double);
+	void xOffsetChanged(double);
+	void yOffsetChanged(double);
+	void penWidthChanged(int);
 
 private:
 	/* This is the new XY Mode GUI */
 	XYModeGUI *newGUI;
 	double yPrescaleFactor;
 	double xPrescaleFactor;
-	double xTranslationFactor;
-	double yTranslationFactor;
+	double xOffset;
+	double yOffset;
+	int penWidth;
 
 	friend class ProcessingXYModeDescription;
 	friend class XYModeGUI;

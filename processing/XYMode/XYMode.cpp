@@ -61,6 +61,7 @@ unsigned ProcessingXYModeDescription::outputCount() const
 
 ProcessingPlugin *ProcessingXYModeDescription::create(const DataSource *dataSource) const
 {
+	Q_UNUSED(dataSource);
 	return new ProcessingXYMode(this);
 }
 
@@ -75,11 +76,13 @@ ProcessingXYMode::ProcessingXYMode(const ProcessingPluginDescription *descriptio
 	newGUI->xData = (short *) malloc(512 * sizeof(short));
 	newGUI->yData = (short *) malloc(512 * sizeof(short)); 
 
-	xPrescaleFactor = 0.02;
-	yPrescaleFactor = 0.04;
+	xPrescaleFactor = 1.0;
+	yPrescaleFactor = 1.0;
 
-	xTranslationFactor = 350;
-	yTranslationFactor = 200;
+	xOffset = 0;
+	yOffset = 0;
+		
+	penWidth = 5;
 	
 	newGUI->show();
 }
@@ -92,12 +95,16 @@ void ProcessingXYMode::xPrescaleFactorChanged(double value) {
 	xPrescaleFactor = value;
 }
 
-void ProcessingXYMode::xTranslationFactorChanged(double value) {
-	xTranslationFactor = value;
+void ProcessingXYMode::xOffsetChanged(double value) {
+	xOffset = value;
 }
 
-void ProcessingXYMode::yTranslationFactorChanged(double value) {
-	yTranslationFactor = value;
+void ProcessingXYMode::yOffsetChanged(double value) {
+	yOffset = value;
+}
+
+void ProcessingXYMode::penWidthChanged(int value) {
+	penWidth = value;
 }
 
 QWidget *ProcessingXYMode::createGUI(void)
@@ -106,58 +113,64 @@ QWidget *ProcessingXYMode::createGUI(void)
 	QGridLayout *layout = new QGridLayout(guiBase);
 
 	QDoubleSpinBox *xPrescaleFactorSpinBox = new QDoubleSpinBox;
-	xPrescaleFactorSpinBox->setRange(0.0,1.0);
-	xPrescaleFactorSpinBox->setSingleStep(0.01);
+	xPrescaleFactorSpinBox->setRange(0.0,100.0);
 	xPrescaleFactorSpinBox->setValue(xPrescaleFactor);
+	xPrescaleFactorSpinBox->setSingleStep(0.01);
 	connect(xPrescaleFactorSpinBox, SIGNAL(valueChanged(double)), SLOT(xPrescaleFactorChanged(double)));
 
 	QDoubleSpinBox *yPrescaleFactorSpinBox = new QDoubleSpinBox;
-	yPrescaleFactorSpinBox->setRange(0.0,1.0);
-	yPrescaleFactorSpinBox->setSingleStep(0.01);
+	yPrescaleFactorSpinBox->setRange(0.0,100.0);
 	yPrescaleFactorSpinBox->setValue(yPrescaleFactor);
+	yPrescaleFactorSpinBox->setSingleStep(0.01);
 	connect(yPrescaleFactorSpinBox, SIGNAL(valueChanged(double)), SLOT(yPrescaleFactorChanged(double)));
 
-	QDoubleSpinBox *xTranslationFactorSpinBox = new QDoubleSpinBox;
-	xTranslationFactorSpinBox->setRange(0.0,500.0);
-	xTranslationFactorSpinBox->setValue(xTranslationFactor);
-	connect(xTranslationFactorSpinBox, SIGNAL(valueChanged(double)), SLOT(xTranslationFactorChanged(double)));
+	QDoubleSpinBox *xOffsetSpinBox = new QDoubleSpinBox;
+	xOffsetSpinBox->setRange(-1000.0,1000.0);
+	xOffsetSpinBox->setValue(xOffset);
+	connect(xOffsetSpinBox, SIGNAL(valueChanged(double)), SLOT(xOffsetChanged(double)));
 
-	QDoubleSpinBox *yTranslationFactorSpinBox = new QDoubleSpinBox;
-	yTranslationFactorSpinBox->setRange(0.0,500.0);
-	yTranslationFactorSpinBox->setValue(yTranslationFactor);
-	connect(yTranslationFactorSpinBox, SIGNAL(valueChanged(double)), SLOT(yTranslationFactorChanged(double)));
-	
-	layout->addWidget(new QLabel(tr("X Axis Prescale Factor [0..1]")), 1, 0);
+	QDoubleSpinBox *yOffsetSpinBox = new QDoubleSpinBox;
+	yOffsetSpinBox->setRange(-1000.0,1000.0);
+	yOffsetSpinBox->setValue(yOffset);
+	connect(yOffsetSpinBox, SIGNAL(valueChanged(double)), SLOT(yOffsetChanged(double)));
+		
+	QSpinBox *penWidthSpinBox = new QSpinBox;
+	penWidthSpinBox->setRange(1,100);
+	penWidthSpinBox->setValue(penWidth);
+	connect(penWidthSpinBox, SIGNAL(valueChanged(int)), SLOT(penWidthChanged(int)));
+
+  
+	layout->addWidget(new QLabel(tr("X Axis Prescale Factor [0 100]")), 1, 0);
 	layout->addWidget(xPrescaleFactorSpinBox, 1, 1);
-	layout->addWidget(new QLabel(tr("Y Axis Prescale Factor [0..1]")), 2, 0);
+	layout->addWidget(new QLabel(tr("Y Axis Prescale Factor [0 100]")), 2, 0);
 	layout->addWidget(yPrescaleFactorSpinBox, 2, 1);
 
-	layout->addWidget(new QLabel(tr("X Axis Translation Factor [0..500]")), 3, 0);
-	layout->addWidget(xTranslationFactorSpinBox, 3, 1);
-	layout->addWidget(new QLabel(tr("Y Axis Translation Factor [0..500]")), 4, 0);
-	layout->addWidget(yTranslationFactorSpinBox, 4, 1);
-	
+	layout->addWidget(new QLabel(tr("X Axis Offset [-1000 1000]")), 3, 0);
+	layout->addWidget(xOffsetSpinBox, 3, 1);
+	layout->addWidget(new QLabel(tr("Y Axis Offset [-1000 1000]")), 4, 0);
+	layout->addWidget(yOffsetSpinBox, 4, 1);
+		
+	layout->addWidget(new QLabel(tr("Dot Width [1 100]")), 5, 0);
+	layout->addWidget(penWidthSpinBox, 5, 1);
+
 	return guiBase;
 }
 
 void ProcessingXYMode::processData(const std::valarray<signed short *> &inputs, const std::valarray<signed short *> &outputs, unsigned sampleCount)
 {  
+	Q_UNUSED(outputs);
+
 	newGUI->sampleCount = sampleCount;
 
 	newGUI->xPrescaleFactor = xPrescaleFactor;
 	newGUI->yPrescaleFactor = yPrescaleFactor;
-	newGUI->xTranslationFactor = xTranslationFactor;
-	newGUI->yTranslationFactor = yTranslationFactor;
-
-
-	/* Initialize (duh) */
-	for(unsigned sample = 0;sample < sampleCount;sample++) {
-		newGUI->xData[sample]  = 0;
-		newGUI->yData[sample]  = 0;
-	}
+	newGUI->xOffset = xOffset;
+	newGUI->yOffset = yOffset;
+	newGUI->penWidth = penWidth;
 
 	/* Read in values (duh) */
-	for(unsigned sample = 0;sample < sampleCount;sample++) {
+	for(unsigned sample = 0;sample < sampleCount;sample++)
+	{
 		newGUI->xData[sample]  = inputs[0][sample];
 		newGUI->yData[sample]  = inputs[1][sample];
 	}
@@ -176,7 +189,7 @@ XYModeGUI::XYModeGUI(QWidget *parent) : QWidget(parent) {
 	/* You can change the color among these defaults, 
 	   check the createGUI function.  */
 	modified = false;
-	myPenWidth = 1;
+	myPenWidth = penWidth;
 	myPenColor = Qt::red;
 }
 
@@ -186,7 +199,7 @@ void XYModeGUI::paintEvent(QPaintEvent *event) {
 		sampleCount, I used a fixed 512 sample count 
 		because of runtime errors in Windows */
 	const int maxSample = 512;
-	int xCoord1,yCoord1,xCoord2,yCoord2;
+	qint64 xCoord1,yCoord1,xCoord2,yCoord2;
 	
 	/* This code is from SignalViewWidget::paintEvent, SignalViewWidget::drawGrid and SignalViewWidget::drawData 
 	check ../src/SignalViewWidget.cpp */
@@ -221,6 +234,7 @@ void XYModeGUI::paintEvent(QPaintEvent *event) {
 			painter.drawLine(xMean-tickWidth + rect().x(), y + rect().y(), xMean+tickWidth + rect().x(), y + rect().y());
 		}
 
+
 	/* Now, draw the data */
 
 	/* Setup draw area */
@@ -228,19 +242,20 @@ void XYModeGUI::paintEvent(QPaintEvent *event) {
 	painter.setClipRect(validRect);
 	
 	/* New pen style for drawing */
-	painter.setPen(QPen(Qt::red,1,Qt::SolidLine,Qt::RoundCap,Qt::RoundJoin));
+	 painter.setPen(QPen(Qt::red,penWidth,Qt::SolidLine,Qt::RoundCap,Qt::RoundJoin));
 
 	/*drawRect is validRect, targetRect is rect */
-	for(unsigned sample = 0;sample < maxSample-1;sample++) {
+	for(unsigned sample = 0;sample < maxSample-1;sample++)
+	{
+		xCoord1 =  (qint64) ((xData[sample] / 10000.0 * xPrescaleFactor + xOffset / 10) * rect().width() + xMean);
+		yCoord1 =  (qint64) ((yData[sample] / 10000.0 * yPrescaleFactor + yOffset / 10) * (-rect().height()) + yMean);
 
-		xCoord1 =  (qint64) ((xData[sample] * xPrescaleFactor) + xTranslationFactor);
-		yCoord1 =  (qint64) ((yData[sample] * yPrescaleFactor) + yTranslationFactor);
-
-		xCoord2 =  (qint64) ((xData[sample+1] * xPrescaleFactor) + xTranslationFactor);
-		yCoord2 =  (qint64) ((yData[sample+1] * yPrescaleFactor) + yTranslationFactor);
+		xCoord2 =  (qint64) ((xData[sample+1] / 10000.0 * xPrescaleFactor + xOffset / 10) * rect().width() + xMean);
+		yCoord2 =  (qint64) ((yData[sample+1] / 10000.0 * yPrescaleFactor + yOffset / 10) * (-rect().height()) + yMean);
 		
 		painter.drawLine(xCoord1,yCoord1,xCoord2,yCoord2);
 	}
 }
+
 
 Q_EXPORT_PLUGIN(ProcessingXYModeDescription)
