@@ -2,16 +2,16 @@ osqoop (1.1.1) karmic; urgency=low
 
   * Updated upstream release, fixed AMD64 compilation
 
- -- Stéphane Magnenat <stephane at magnenat dot net>  Wed, 04 Nov 2009 16:45:14 +0100
+ -- Stéphane Magnenat <stephane@nospam.magnenat.net>  Wed, 04 Nov 2009 16:45:14 +0100
 
 osqoop (1.1.0) karmic; urgency=low
 
   * Updated upstream release
 
- -- Stéphane Magnenat <stephane at magnenat dot net>  Tue, 27 Oct 2009 18:06:43 +0100
+ -- Stéphane Magnenat <stephane@nospam.magnenat.net>  Tue, 27 Oct 2009 18:06:43 +0100
 
 osqoop (1.0.0) dapper; urgency=low
 
   * Initial release.
 
- -- Stephane Magnenat <stephane at magnenat dot net>  Fri,  8 Sep 2006 17:30:39 +0200
+ -- Stephane Magnenat <stephane@nospam.magnenat.net>  Fri,  8 Sep 2006 17:30:39 +0200

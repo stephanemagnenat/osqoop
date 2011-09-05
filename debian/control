@@ -1,9 +1,9 @@
 Source: osqoop
-Maintainer: Stephane Magnenat <stephane at  magnenat dot net>
+Maintainer: Stephane Magnenat <stephane@nospam.magnenat.net>
 Section: science
 Priority: optional
 Standards-Version: 3.7.2
-Build-Depends: libqt4-dev,libusb-dev,debhelper (>= 5),cmake (>= 2.6)
+Build-Depends: libqt4-dev,libusb-dev,libxtst-dev,debhelper (>= 5),cmake (>= 2.6)
 
 Package: osqoop
 Architecture: any
