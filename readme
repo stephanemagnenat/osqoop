@@ -9,7 +9,7 @@ Osqoop uses cmake (http://cmake.org) and is thus easy to compile. It supports ou
   cmake -DCMAKE_INSTALL_PREFIX=../target ..
   make
   make install
-  cd ../target && ./osqoop
+  cd ../target && bin/osqoop
 
 Usage
 =====
