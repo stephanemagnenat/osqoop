@@ -1,3 +1,9 @@
+osqoop (1.2.0) natty; urgency=low
+
+  * Updated upstream release, fixed debian build
+
+ -- Stéphane Magnenat <stephane@nospam.magnenat.net>  Mon, 05 Sep 2011 16:48:02 +0200
+
 osqoop (1.1.1) karmic; urgency=low
 
   * Updated upstream release, fixed AMD64 compilation
