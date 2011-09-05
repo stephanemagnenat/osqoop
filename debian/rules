@@ -27,10 +27,7 @@ binary-arch: build
 	cp changelog debian/tmp/usr/share/doc/osqoop
 	cp authors debian/tmp/usr/share/doc/osqoop
 	cp -r doc/manual/* debian/tmp/usr/share/doc/osqoop/manual
-	cp -r debian/build/processing/*.so debian/tmp/usr/share/osqoop/processing
-	cp -r debian/build/datasource/*.so debian/tmp/usr/share/osqoop/datasource
-	cp debian/build/osqoop debian/tmp/usr/bin
-	cp debian/build/osqoop-setupfx2 debian/tmp/usr/share/osqoop
+	#cp debian/build/osqoop-setupfx2 debian/tmp/usr/share/osqoop
 	cp helper/tseadextfw.hex debian/tmp/usr/share/osqoop/
 	dh_strip
 	dh_compress
