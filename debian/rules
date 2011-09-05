@@ -1,7 +1,6 @@
 #!/usr/bin/make -f
 
-build:
-	dh_testdir
+build: clean
 	mkdir -p debian/build
 	cd debian/build && cmake -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=../tmp/usr -DCMAKE_CXX_FLAGS:STRING="-DFX2_FIRMWARE_DIR=\\\"/usr/share/osqoop\\\"" ../..
 	cd debian/build && VERBOSE=1 $(MAKE) && VERBOSE=1 $(MAKE) install
@@ -13,8 +12,6 @@ clean:
 binary­indep: build
 
 binary-arch: build
-	dh_testdir
-	rm -rf debian/tmp
 	install -d debian/tmp/DEBIAN
 	install -d debian/tmp/usr/bin
 	install -d debian/tmp/usr/share/doc/osqoop
@@ -27,7 +24,6 @@ binary-arch: build
 	cp changelog debian/tmp/usr/share/doc/osqoop
 	cp authors debian/tmp/usr/share/doc/osqoop
 	cp -r doc/manual/* debian/tmp/usr/share/doc/osqoop/manual
-	#cp debian/build/osqoop-setupfx2 debian/tmp/usr/share/osqoop
 	cp helper/tseadextfw.hex debian/tmp/usr/share/osqoop/
 	dh_strip
 	dh_compress
