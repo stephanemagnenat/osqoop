@@ -21,7 +21,7 @@ Usage
 
 Osqoop comes with an end-user manual. Look at in the doc/manual directory.
 
-On Linux, the sound card datasource uses OSS, which is outdated now, as ALSA is the standard. However, ALSA provides a OSS-wrapper, called aoss. If you launch Osqoop thrigh it:
+On Linux, the sound card datasource uses OSS, which is outdated now, as ALSA is the standard. However, ALSA provides a OSS-wrapper, called aoss. If you launch Osqoop through it:
 
     aoss osqoop
 
