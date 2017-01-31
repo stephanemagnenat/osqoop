@@ -69,7 +69,7 @@ public:
 	virtual QWidget *createGUI(void) { return NULL; }
 	//! Apply plugin to datas
 	virtual void processData(const std::valarray<signed short *> &inputs, const std::valarray<signed short *> &outputs, unsigned sampleCount) = 0;
-	//! Self delete, usefull for reimplementation using QObject that would do a deleteLater instead of delete this
+	//! Self delete, useful for reimplementation using QObject that would do a deleteLater instead of delete this
 	virtual void terminate(void) { delete this; }
 	//! Load instance specific data from text stream
 	virtual void load(QTextStream *) { }
