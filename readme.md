@@ -4,12 +4,12 @@ Compilation
 ===========
 
 Osqoop uses cmake (http://cmake.org) and is thus easy to compile. It supports out of source build and should compile on any major desktop operating system. To quickly compile and run Osqoop under Unix, type the following:
-  mkdir build && mkdir target
-  cd build
-  cmake -DCMAKE_INSTALL_PREFIX=../target ..
-  make
-  make install
-  cd ../target && bin/osqoop
+    mkdir build && mkdir target
+    cd build
+    cmake -DCMAKE_INSTALL_PREFIX=../target ..
+    make
+    make install
+    cd ../target && bin/osqoop
 
 Usage
 =====
@@ -17,7 +17,7 @@ Usage
 Osqoop comes with an end-user manual. Look at in the doc/manual directory.
 
 On Linux, the sound card datasource uses OSS, which is outdated now, as ALSA is the standard. However, ALSA provides a OSS-wrapper, called aoss. If you launch Osqoop thrigh it:
-  aoss osqoop
+    aoss osqoop
 the sound card datasource should work.
 
 Hacking
