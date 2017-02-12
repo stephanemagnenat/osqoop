@@ -25,8 +25,12 @@ osqoop_processing_plugin(Mult)
 osqoop_processing_plugin(Negate)
 osqoop_processing_plugin(Pow)
 osqoop_processing_plugin(Sum)
-osqoop_processing_plugin(VirtualMouse)
 osqoop_processing_plugin(XYMode)
+
+find_path(XTEST_INCLUDE_DIR X11/extensions/XTest.h)
+if (XTEST_INCLUDE_DIR)
+    osqoop_processing_plugin(VirtualMouse)
+endif()
 
 if (FFTW_FOUND)
         include_directories (${FFTW_INCLUDE_DIR} ${CMAKE_BINARY_DIR}/processing/SpectroGraph)
