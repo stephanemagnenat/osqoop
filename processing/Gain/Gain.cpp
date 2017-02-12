@@ -30,7 +30,6 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #include <QtCore>
 #include <QDoubleSpinBox>
 #include "Gain.h"
-#include <Gain.moc>
 
 QString ProcessingGainDescription::systemName() const
 {
@@ -101,5 +100,3 @@ void ProcessingGain::save(QTextStream *stream)
 {
 	(*stream) << gain;
 }
-
-Q_EXPORT_PLUGIN(ProcessingGainDescription)

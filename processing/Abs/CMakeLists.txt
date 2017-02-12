@@ -1,5 +1,5 @@
 set(Abs_SRCS Abs.cpp)
-qt4_automoc(${Abs_SRCS})
 include_directories (${CMAKE_BINARY_DIR}/processing/Abs)
 add_library(Abs MODULE ${Abs_SRCS})
+target_link_libraries(Abs Qt5::Core)
 install(TARGETS Abs DESTINATION share/osqoop/processing)

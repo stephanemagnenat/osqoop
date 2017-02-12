@@ -70,7 +70,8 @@ private slots:
 class DdsDataSourceDescription : public QObject, public DataSourceDescription
 {
 	Q_OBJECT
-	Q_INTERFACES(DataSourceDescription)
+    Q_PLUGIN_METADATA(IID "ch.eig.lsn.Oscilloscope.DataSourceDescription/1.0" FILE "dds.json")
+    Q_INTERFACES(DataSourceDescription)
 
 public:
 	virtual QString name() const;

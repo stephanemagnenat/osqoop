@@ -42,7 +42,8 @@ class IIRFilter;
 class IIR2ndOrderFilterDescription : public QObject, public ProcessingPluginDescription
 {
 	Q_OBJECT
-	Q_INTERFACES(ProcessingPluginDescription)
+    Q_PLUGIN_METADATA(IID "ch.eig.lsn.Oscilloscope.ProcessingPluginDescription/1.0" FILE "iir2ndorder.json")
+    Q_INTERFACES(ProcessingPluginDescription)
 
 public:
 	QString systemName() const;

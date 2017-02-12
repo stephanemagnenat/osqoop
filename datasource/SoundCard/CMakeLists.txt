@@ -1,5 +1,5 @@
 set(SoundCard_SRCS SoundCard.cpp)
-qt4_automoc(${SoundCard_SRCS})
 include_directories (${CMAKE_BINARY_DIR}/datasource/SoundCard)
 add_library(SoundCard MODULE ${SoundCard_SRCS})
+target_link_libraries(SoundCard Qt5::Core Qt5::Widgets)
 install(TARGETS SoundCard DESTINATION share/osqoop/datasource)

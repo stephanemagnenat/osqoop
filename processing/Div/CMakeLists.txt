@@ -1,5 +1,5 @@
 set(Div_SRCS Div.cpp)
-qt4_automoc(${Div_SRCS})
 include_directories (${CMAKE_BINARY_DIR}/processing/Div)
 add_library(Div MODULE ${Div_SRCS})
+target_link_libraries(Div Qt5::Core)
 install(TARGETS Div DESTINATION share/osqoop/processing)

@@ -28,7 +28,6 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
 #include "DataConverter.h"
-#include <DataConverter.moc>
 #include "DataSource.h"
 #include "ProcessingPlugin.h"
 #include "DataConverter.h"

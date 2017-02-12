@@ -1,5 +1,5 @@
 set(Greater_SRCS Greater.cpp)
-qt4_automoc(${Greater_SRCS})
 include_directories (${CMAKE_BINARY_DIR}/processing/Greater)
 add_library(Greater MODULE ${Greater_SRCS})
+target_link_libraries(Greater Qt5::Core)
 install(TARGETS Greater DESTINATION share/osqoop/processing)

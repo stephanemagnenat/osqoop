@@ -1,6 +1,5 @@
 set(BandPass2ndOrderFilter_SRCS ProcessingBandPass2ndOrderFilter.cpp)
-qt4_automoc(${BandPass2ndOrderFilter_SRCS})
 include_directories (${CMAKE_BINARY_DIR}/processing/BandPass2ndOrderFilter)
 add_library(BandPass2ndOrderFilter MODULE ${BandPass2ndOrderFilter_SRCS})
-target_link_libraries(BandPass2ndOrderFilter processing)
+target_link_libraries(BandPass2ndOrderFilter processing Qt5::Core Qt5::Widgets)
 install(TARGETS BandPass2ndOrderFilter DESTINATION share/osqoop/processing)

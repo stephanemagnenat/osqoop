@@ -1,5 +1,5 @@
 set(Gain_SRCS Gain.cpp)
-qt4_automoc(${Gain_SRCS})
 include_directories (${CMAKE_BINARY_DIR}/processing/Gain)
 add_library(Gain MODULE ${Gain_SRCS})
+target_link_libraries(Gain Qt5::Core Qt5::Widgets)
 install(TARGETS Gain DESTINATION share/osqoop/processing)

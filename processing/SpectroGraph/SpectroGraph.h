@@ -51,7 +51,8 @@ enum {Power, Phase};
 class ProcessingSpectroGraphDescription : public QObject, public ProcessingPluginDescription
 {
 	Q_OBJECT
-	Q_INTERFACES(ProcessingPluginDescription)
+    Q_PLUGIN_METADATA(IID "ch.eig.lsn.Oscilloscope.ProcessingPluginDescription/1.0" FILE "spectrograph.json")
+    Q_INTERFACES(ProcessingPluginDescription)
 
 public:
 	QString systemName() const;

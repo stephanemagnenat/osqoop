@@ -28,7 +28,6 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
 #include "OscilloscopeWindow.h"
-#include <OscilloscopeWindow.moc>
 #include "SignalViewWidget.h"
 #include "ProcessingPlugin.h"
 #include "ProcessingPluginDialog.h"

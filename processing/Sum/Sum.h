@@ -36,7 +36,8 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 class ProcessingSumDescription : public QObject, public ProcessingPluginDescription
 {
 	Q_OBJECT
-	Q_INTERFACES(ProcessingPluginDescription)
+    Q_PLUGIN_METADATA(IID "ch.eig.lsn.Oscilloscope.ProcessingPluginDescription/1.0" FILE "sum.json")
+    Q_INTERFACES(ProcessingPluginDescription)
 
 public:
 	QString systemName() const;

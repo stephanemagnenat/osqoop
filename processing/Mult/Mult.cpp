@@ -27,7 +27,6 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 #include <QtCore>
 #include "Mult.h"
-#include <Mult.moc>
 
 QString ProcessingMultDescription::systemName() const
 {
@@ -67,5 +66,3 @@ void ProcessingMult::processData(const std::valarray<signed short *> &inputs, co
 	for (unsigned sample = 0; sample < sampleCount; sample++)
 		*destPtr++ = (*srcPtr0++) * (*srcPtr1++);
 }
-
-Q_EXPORT_PLUGIN(ProcessingMultDescription)

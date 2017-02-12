@@ -106,7 +106,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 int main(int argc, char *argv[])
 {
 	QApplication app(argc, argv);
-	QTextCodec::setCodecForTr(QTextCodec::codecForName("UTF-8"));
+//	QTextCodec::setCodecForTr(QTextCodec::codecForName("UTF-8"));
 	QTranslator translator;
 	translator.load(QString("osqoop_") + QLocale::system().name(), ":");
 	app.installTranslator(&translator);

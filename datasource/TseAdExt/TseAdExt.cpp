@@ -35,7 +35,6 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #include <QVBoxLayout>
 #include <QDialog>
 #include "TseAdExt.h"
-#include <TseAdExt.moc>
 #include "CypressEzUSBDevice.h"
 
 //! Dialog box for choosing datasource frequency
@@ -219,5 +218,3 @@ void TseAdExtDataSource::run()
 		usedChunks.release();
 	}
 }
-
-Q_EXPORT_PLUGIN(TseAdExtDataSourceDescription)

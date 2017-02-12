@@ -27,7 +27,6 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 #include <QtCore>
 #include "Greater.h"
-#include <Greater.moc>
 
 QString ProcessingGreaterDescription::systemName() const
 {
@@ -76,5 +75,3 @@ void ProcessingGreater::processData(const std::valarray<signed short *> &inputs,
         srcPtr3++;
     }
 }
-
-Q_EXPORT_PLUGIN(ProcessingGreaterDescription)

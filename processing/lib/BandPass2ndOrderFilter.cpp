@@ -30,7 +30,6 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
 #include "BandPass2ndOrderFilter.h"
-#include <BandPass2ndOrderFilter.moc>
 #include <cmath>
 
 //! Constructor. Build a filter with a given initial cut-off frequency and bandwidth

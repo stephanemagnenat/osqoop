@@ -101,7 +101,8 @@ protected:
 class TseAdExtDataSourceDescription : public QObject, public DataSourceDescription
 {
 	Q_OBJECT
-	Q_INTERFACES(DataSourceDescription)
+    Q_PLUGIN_METADATA(IID "ch.eig.lsn.Oscilloscope.DataSourceDescription/1.0" FILE "tseadext.json")
+    Q_INTERFACES(DataSourceDescription)
 
 public:
 	virtual QString name() const { return "TseAdExt acquisition board"; }

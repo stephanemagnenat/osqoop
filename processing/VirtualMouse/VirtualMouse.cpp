@@ -30,7 +30,6 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #include <QtCore>
 #include <QCheckBox>
 #include "VirtualMouse.h"
-#include <VirtualMouse.moc>
 #include <QtGlobal>
 
 #if defined(Q_WS_WIN32)
@@ -165,6 +164,3 @@ void ProcessingVirtualMouse::moveMouse(int dx, int dy, unsigned buttons)
 		#endif
 	}
 }
-
-Q_EXPORT_PLUGIN(ProcessingVirtualMouseDescription)
-

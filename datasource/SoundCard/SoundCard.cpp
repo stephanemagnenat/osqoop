@@ -34,7 +34,6 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #include <QLabel>
 #include <QMessageBox>
 #include "SoundCard.h"
-#include <SoundCard.moc>
 
 
 //! Dialog box for choosing sound input
@@ -306,5 +305,3 @@ unsigned SoundCardDataSource::unitPerVoltCount() const
 	return 10000;
 }
 
-
-Q_EXPORT_PLUGIN(SoundCardDataSourceDescription)

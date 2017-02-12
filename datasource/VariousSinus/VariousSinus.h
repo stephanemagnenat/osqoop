@@ -36,7 +36,8 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 class VariousSinusDataSourceDescription : public QObject, public DataSourceDescription
 {
 	Q_OBJECT
-	Q_INTERFACES(DataSourceDescription)
+    Q_PLUGIN_METADATA(IID "ch.eig.lsn.Oscilloscope.DataSourceDescription/1.0" FILE "varioussinus.json")
+    Q_INTERFACES(DataSourceDescription)
 
 public:
 	virtual QString name() const;

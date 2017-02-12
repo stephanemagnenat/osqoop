@@ -1,5 +1,5 @@
 set(Mult_SRCS Mult.cpp)
-qt4_automoc(${Mult_SRCS})
 include_directories (${CMAKE_BINARY_DIR}/processing/Mult)
 add_library(Mult MODULE ${Mult_SRCS})
+target_link_libraries(Mult Qt5::Core)
 install(TARGETS Mult DESTINATION share/osqoop/processing)
