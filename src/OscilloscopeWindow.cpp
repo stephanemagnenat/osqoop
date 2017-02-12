@@ -1197,7 +1197,8 @@ void OscilloscopeWindow::loadPlugins()
 	QStringList potentialDirs;
 	
 	potentialDirs << QCoreApplication::applicationDirPath();
-	potentialDirs << (QCoreApplication::applicationDirPath() + "/../share/osqoop");
+    potentialDirs << QCoreApplication::applicationDirPath() + "/../";
+    potentialDirs << (QCoreApplication::applicationDirPath() + "/../share/osqoop");
 	potentialDirs << ".osqoop/";
 	
 	foreach (QString dirName, potentialDirs)
