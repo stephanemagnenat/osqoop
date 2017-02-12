@@ -281,7 +281,11 @@ unsigned DdsDataSource::getRawData(std::valarray<std::valarray<signed short> > *
         break;
       case 4:
         for (size_t sample = 0; sample < 512; sample++)
-          (*data)[0][sample] = c0[sample] / c1[sample];
+            if (c1[sample]) {
+              (*data)[0][sample] = c0[sample] / c1[sample];
+            } else {
+              (*data)[0][sample] = c0[sample];
+            }
         break; 
       case 5:
         for (size_t sample = 0; sample < 512; sample++)
@@ -289,7 +293,11 @@ unsigned DdsDataSource::getRawData(std::valarray<std::valarray<signed short> > *
         break;    
       case 6:
         for (size_t sample = 0; sample < 512; sample++)
-          (*data)[0][sample] = 1 / c0[sample];
+            if (c0[sample]) {
+              (*data)[0][sample] = 1 / c0[sample];
+            } else {
+              (*data)[0][sample] = 1;
+            }
         break; 
       case 0:
       default:
