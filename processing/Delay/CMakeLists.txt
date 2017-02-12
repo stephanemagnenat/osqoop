@@ -1,5 +1,0 @@
-set(Delay_SRCS Delay.cpp)
-include_directories (${CMAKE_BINARY_DIR}/processing/Delay)
-add_library(Delay MODULE ${Delay_SRCS})
-target_link_libraries(Delay Qt5::Core Qt5::Widgets)
-install(TARGETS Delay DESTINATION share/osqoop/processing)

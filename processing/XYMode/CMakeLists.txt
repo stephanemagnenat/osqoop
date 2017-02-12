@@ -1,5 +1,0 @@
-set(XYMode_SRCS XYMode.cpp)
-include_directories (${CMAKE_BINARY_DIR}/processing/XYMode)
-add_library(XYMode MODULE ${XYMode_SRCS})
-target_link_libraries(XYMode Qt5::Core Qt5::Widgets)
-install(TARGETS XYMode DESTINATION share/osqoop/processing)

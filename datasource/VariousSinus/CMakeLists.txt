@@ -1,5 +1,0 @@
-set(VariousSinus_SRCS VariousSinus.cpp)
-include_directories (${CMAKE_BINARY_DIR}/datasource/VariousSinus)
-add_library(VariousSinus MODULE ${VariousSinus_SRCS})
-target_link_libraries(VariousSinus Qt5::Core)
-install(TARGETS VariousSinus DESTINATION share/osqoop/datasource)

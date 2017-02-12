@@ -1,5 +1,0 @@
-set(Sum_SRCS Sum.cpp)
-include_directories (${CMAKE_BINARY_DIR}/processing/Sum)
-add_library(Sum MODULE ${Sum_SRCS})
-target_link_libraries(Sum Qt5::Core)
-install(TARGETS Sum DESTINATION share/osqoop/processing)

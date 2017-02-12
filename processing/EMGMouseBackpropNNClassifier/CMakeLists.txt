@@ -1,5 +1,0 @@
-set(EMGMouseBackpropNNClassifier_SRCS EMGMouseBackpropNNClassifier.cpp)
-include_directories (${CMAKE_BINARY_DIR}/processing/EMGMouseBackpropNNClassifier)
-add_library(EMGMouseBackpropNNClassifier MODULE ${EMGMouseBackpropNNClassifier_SRCS})
-target_link_libraries(EMGMouseBackpropNNClassifier processing Qt5::Widgets)
-install(TARGETS EMGMouseBackpropNNClassifier DESTINATION share/osqoop/processing)

@@ -1,5 +1,0 @@
-set(Pow_SRCS Pow.cpp)
-include_directories (${CMAKE_BINARY_DIR}/processing/Pow)
-add_library(Pow MODULE ${Pow_SRCS})
-target_link_libraries(Pow Qt5::Core Qt5::Widgets)
-install(TARGETS Pow DESTINATION share/osqoop/processing)

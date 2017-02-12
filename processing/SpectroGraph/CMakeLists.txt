@@ -1,7 +1,0 @@
-if (FFTW_FOUND)
-	set(SpectroGraph_SRCS SpectroGraph.cpp)
-	include_directories (${FFTW_INCLUDE_DIR} ${CMAKE_BINARY_DIR}/processing/SpectroGraph)
-	add_library(SpectroGraph MODULE ${SpectroGraph_SRCS})
-        target_link_libraries(SpectroGraph ${FFTW_LIBRARIES} Qt5::Core Qt5::Widgets)
-	install(TARGETS SpectroGraph DESTINATION share/osqoop/processing)
-endif (FFTW_FOUND)

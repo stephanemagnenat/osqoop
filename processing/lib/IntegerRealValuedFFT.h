@@ -70,7 +70,7 @@ public:
 		// fill sinus table
 		for(unsigned i=0; i<size; i++)
 		{
-			register double s, c;
+                        double s, c;
 			s = floor(-32768.0*sin((M_PI*i)/(size))+0.5);
 			c = floor(-32768.0*cos((M_PI*i)/(size))+0.5);
 			if (s>32767.5)
@@ -135,8 +135,8 @@ public:
 
 			while (A<endptr1)
 			{
-				register short sin = *sptr;
-				register short cos = *(sptr+1);
+                                short sin = *sptr;
+                                short cos = *(sptr+1);
 				short *endptr2 = B;
 				while (A<endptr2)
 				{
@@ -160,7 +160,7 @@ public:
 
 		while (br1 <= br2)
 		{
-			register long temp1, temp2;
+                        long temp1, temp2;
 			short sin = SinTable[*br1];
 			short cos = SinTable[*br1+1];
 			short *A = buffer + *br1;

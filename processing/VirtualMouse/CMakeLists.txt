@@ -1,8 +1,0 @@
-find_path(XTEST_INCLUDE_DIR X11/extensions/XTest.h)
-if (XTEST_INCLUDE_DIR)
-    set(VirtualMouse_SRCS VirtualMouse.cpp)
-    include_directories (${CMAKE_BINARY_DIR}/processing/VirtualMouse)
-    add_library(VirtualMouse MODULE ${VirtualMouse_SRCS})
-    target_link_libraries(VirtualMouse Qt5::Core Qt5::Widgets)
-    install(TARGETS VirtualMouse DESTINATION share/osqoop/processing)
-endif()

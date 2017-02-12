@@ -1,5 +1,0 @@
-set(Const_SRCS Const.cpp)
-include_directories (${CMAKE_BINARY_DIR}/processing/Const)
-add_library(Const MODULE ${Const_SRCS})
-target_link_libraries(Const Qt5::Core Qt5::Widgets)
-install(TARGETS Const DESTINATION share/osqoop/processing)

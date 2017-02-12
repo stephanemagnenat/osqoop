@@ -1,5 +1,0 @@
-set(Div_SRCS Div.cpp)
-include_directories (${CMAKE_BINARY_DIR}/processing/Div)
-add_library(Div MODULE ${Div_SRCS})
-target_link_libraries(Div Qt5::Core)
-install(TARGETS Div DESTINATION share/osqoop/processing)

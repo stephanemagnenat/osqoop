@@ -1,5 +1,0 @@
-set(EMGEnvelope_SRCS EMGEnvelope.cpp)
-include_directories (${CMAKE_BINARY_DIR}/processing/EMGEnvelope)
-add_library(EMGEnvelope MODULE ${EMGEnvelope_SRCS})
-target_link_libraries(EMGEnvelope processing Qt5::Core Qt5::Widgets)
-install(TARGETS EMGEnvelope DESTINATION share/osqoop/processing)
