@@ -36,8 +36,8 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 class VariousSinusDataSourceDescription : public QObject, public DataSourceDescription
 {
 	Q_OBJECT
-    Q_PLUGIN_METADATA(IID "ch.eig.lsn.Oscilloscope.DataSourceDescription/1.0" FILE "varioussinus.json")
-    Q_INTERFACES(DataSourceDescription)
+	Q_PLUGIN_METADATA(IID "ch.eig.lsn.Oscilloscope.DataSourceDescription/1.0" FILE "varioussinus.json")
+	Q_INTERFACES(DataSourceDescription)
 
 public:
 	virtual QString name() const;
@@ -60,8 +60,9 @@ public:
 	
 	virtual unsigned inputCount() const;
 	virtual unsigned samplingRate() const;
-    virtual unsigned unitPerVoltCount() const;
+	virtual unsigned unitPerVoltCount() const;
 };
 
 
 #endif
+/* vim: set ts=8 sw=8 tw=0 noexpandtab cindent softtabstop=8 :*/

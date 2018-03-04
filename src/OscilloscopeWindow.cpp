@@ -1197,8 +1197,8 @@ void OscilloscopeWindow::loadPlugins()
 	QStringList potentialDirs;
 	
 	potentialDirs << QCoreApplication::applicationDirPath();
-    potentialDirs << QCoreApplication::applicationDirPath() + "/../";
-    potentialDirs << (QCoreApplication::applicationDirPath() + "/../share/osqoop");
+	potentialDirs << QCoreApplication::applicationDirPath() + "/../";
+	potentialDirs << (QCoreApplication::applicationDirPath() + "/../share/osqoop");
 	potentialDirs << ".osqoop/";
 	
 	foreach (QString dirName, potentialDirs)
@@ -1301,3 +1301,5 @@ void OscilloscopeWindow::loadGUISettings()
 		settings.endGroup();
 	}
 }
+
+/* vim: set ts=8 sw=8 tw=0 noexpandtab cindent softtabstop=8 :*/

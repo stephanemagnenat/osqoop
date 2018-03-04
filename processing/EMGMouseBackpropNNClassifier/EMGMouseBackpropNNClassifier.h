@@ -41,8 +41,8 @@ const unsigned EMGMouseBackpropNNLearningStepCount = 64;
 class ProcessingEMGMouseBackpropNNClassifierDescription : public QObject, public ProcessingPluginDescription
 {
 	Q_OBJECT
-    Q_PLUGIN_METADATA(IID "ch.eig.lsn.Oscilloscope.ProcessingPluginDescription/1.0" FILE "emgmousebackpropnnclassifier.json")
-    Q_INTERFACES(ProcessingPluginDescription)
+	Q_PLUGIN_METADATA(IID "ch.eig.lsn.Oscilloscope.ProcessingPluginDescription/1.0" FILE "emgmousebackpropnnclassifier.json")
+	Q_INTERFACES(ProcessingPluginDescription)
 
 public:
 	QString systemName() const;
@@ -148,3 +148,4 @@ public slots:
 };
 
 #endif
+/* vim: set ts=8 sw=8 tw=0 noexpandtab cindent softtabstop=8 :*/

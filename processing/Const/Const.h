@@ -39,8 +39,8 @@ class QDoubleSpinBox;
 class ProcessingConstDescription : public QObject, public ProcessingPluginDescription
 {
 	Q_OBJECT
-    Q_PLUGIN_METADATA(IID "ch.eig.lsn.Oscilloscope.ProcessingPluginDescription/1.0" FILE "const.json")
-    Q_INTERFACES(ProcessingPluginDescription)
+	Q_PLUGIN_METADATA(IID "ch.eig.lsn.Oscilloscope.ProcessingPluginDescription/1.0" FILE "const.json")
+	Q_INTERFACES(ProcessingPluginDescription)
 
 public:
 	QString systemName() const;
@@ -65,7 +65,7 @@ public:
 	
 private slots:
 	void ConstRawChanged(int);
-    void ConstVoltChanged(double);
+	void ConstVoltChanged(double);
 	
 private:
 	friend class ProcessingConstDescription;
@@ -73,9 +73,10 @@ private:
 	
 private:
 	int value;
-    const DataSource *dataSource; //!< data source, to get sampling rate
-    QSpinBox *rawSpinBox;
-    QDoubleSpinBox *voltSpinBox;
+	const DataSource *dataSource; //!< data source, to get sampling rate
+	QSpinBox *rawSpinBox;
+	QDoubleSpinBox *voltSpinBox;
 };
 
 #endif
+/* vim: set ts=8 sw=8 tw=0 noexpandtab cindent softtabstop=8 :*/
