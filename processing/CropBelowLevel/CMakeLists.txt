@@ -1,5 +1,0 @@
-set(CropBelowLevel_SRCS CropBelowLevel.cpp)
-qt4_automoc(${CropBelowLevel_SRCS})
-include_directories (${CMAKE_BINARY_DIR}/processing/CropBelowLevel)
-add_library(CropBelowLevel MODULE ${CropBelowLevel_SRCS})
-install(TARGETS CropBelowLevel DESTINATION share/osqoop/processing)

@@ -29,9 +29,12 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 #include <QtCore>
 #include <QFontMetrics>
+#include <QGridLayout>
+#include <QLabel>
+#include <QComboBox>
+#include <QCheckBox>
 
 #include "SpectroGraph.h"
-#include <SpectroGraph.moc>
 #include <DataSource.h>
 #include <stdio.h>
 
@@ -670,5 +673,3 @@ void SpectroGraphGUI::resizeEvent(QResizeEvent *)
           persistantBuffer = NULL;
 	}
 }
-
-Q_EXPORT_PLUGIN(ProcessingSpectroGraphDescription)

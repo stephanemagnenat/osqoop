@@ -40,7 +40,7 @@ QString timeScaleToStringWidthToDiv(unsigned duration)
 {
 	QString timeScaleText;
 	// 100 us to 1 ms per division
-	if (abs(duration) < 10)
+	if (qAbs(duration) < 10)
 	{
 		/* we use argument 1 to 4 instead of 1 to 2 because %10
 		is wrongly assumed as being argument 10 instead of argument
@@ -48,7 +48,7 @@ QString timeScaleToStringWidthToDiv(unsigned duration)
 		timeScaleText = QString("%1%3%4 %2s").arg(duration).arg(QChar(0xB5, 0)).arg(0).arg(0);
 	}
 	// 1 ms to 1000 ms per division
-	else if (abs(duration) < 10000)
+	else if (qAbs(duration) < 10000)
 	{
 		timeScaleText = QString("%1 ms").arg(duration /10);
 	}
@@ -183,7 +183,7 @@ unsigned channelNumberFromString(const QString &channel)
 	}
 	
 	// then standard names
-	if (channel.toAscii().constData()[0] == 'S')
+	if (channel.toLatin1().constData()[0] == 'S')
 		return channel.mid(1).toUInt() - 1;
 	else
 		return channel.mid(1).toUInt() + dataSourceChannelCount - 1;
@@ -294,3 +294,4 @@ unsigned getScaleFactorInvert(unsigned factor)
 	}
 	return nearestIndex;
 }
+/* vim: set ts=8 sw=8 tw=0 noexpandtab cindent softtabstop=8 :*/

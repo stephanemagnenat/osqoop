@@ -42,6 +42,7 @@ class IIRFilter;
 class IIR2ndOrderFilterDescription : public QObject, public ProcessingPluginDescription
 {
 	Q_OBJECT
+	Q_PLUGIN_METADATA(IID "ch.eig.lsn.Oscilloscope.ProcessingPluginDescription/1.0" FILE "iir2ndorder.json")
 	Q_INTERFACES(ProcessingPluginDescription)
 
 public:
@@ -56,7 +57,7 @@ public:
 //! IIR 2nd order filter with user defined coefficient
 class IIR2ndOrderFilter : public QObject, public ProcessingPlugin
 {
-    Q_OBJECT
+	Q_OBJECT
     
 public:
 	QWidget *createGUI(void);
@@ -69,11 +70,11 @@ protected:
 	~IIR2ndOrderFilter();
 
 private slots:
-    void b0Changed(double);
-    void b1Changed(double);
-    void b2Changed(double);
+	void b0Changed(double);
+	void b1Changed(double);
+	void b2Changed(double);
 	void a1Changed(double);
-    void a2Changed(double);
+	void a2Changed(double);
 
 private:
 	friend class IIR2ndOrderFilterDescription;
@@ -81,8 +82,9 @@ private:
 	
 private:
 	IIRFilter *filter;
-    double b[3];
-    double a[3];
+	double b[3];
+	double a[3];
 };
 
 #endif
+/* vim: set ts=8 sw=8 tw=0 noexpandtab cindent softtabstop=8 :*/

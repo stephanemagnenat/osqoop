@@ -79,7 +79,7 @@ public:
 	
 	virtual unsigned inputCount() const { return 8; }
 	virtual unsigned samplingRate() const { return 24500 / sliceLength; }
-    virtual unsigned unitPerVoltCount() const { return 1638; }
+	virtual unsigned unitPerVoltCount() const { return 1638; }
 
 protected:
 	//! An element of the circular buffer containing datas
@@ -101,6 +101,7 @@ protected:
 class TseAdExtDataSourceDescription : public QObject, public DataSourceDescription
 {
 	Q_OBJECT
+	Q_PLUGIN_METADATA(IID "ch.eig.lsn.Oscilloscope.DataSourceDescription/1.0" FILE "tseadext.json")
 	Q_INTERFACES(DataSourceDescription)
 
 public:
@@ -111,3 +112,4 @@ public:
 
 
 #endif
+/* vim: set ts=8 sw=8 tw=0 noexpandtab cindent softtabstop=8 :*/

@@ -29,7 +29,6 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 #include <IIRFilter.h>
 #include "IIR2ndOrderFilter.h"
-#include <IIR2ndOrderFilter.moc>
 #include <DataSource.h>
 #include <QDoubleSpinBox>
 #include <QGridLayout>
@@ -203,5 +202,3 @@ void IIR2ndOrderFilter::save(QTextStream *stream)
         (*stream) << a[i] << " ";
     filter->setCoeffs(b, a);
 }
-
-Q_EXPORT_PLUGIN(IIR2ndOrderFilterDescription)

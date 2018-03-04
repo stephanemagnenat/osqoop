@@ -27,7 +27,6 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 #include <QtCore>
 #include "Div.h"
-#include <Div.moc>
 #include <limits>
 
 QString ProcessingDivDescription::systemName() const
@@ -73,14 +72,12 @@ void ProcessingDiv::processData(const std::valarray<signed short *> &inputs, con
         if (op2 == 0)
         {
             if (op1 > 0)
-                result == std::numeric_limits<signed short>::max();
+                result = std::numeric_limits<signed short>::max();
             else
-                result == std::numeric_limits<signed short>::min();
+                result = std::numeric_limits<signed short>::min();
         }
         else
             result = op1 / op2;
         *destPtr++ = result;
     }
 }
-
-Q_EXPORT_PLUGIN(ProcessingDivDescription)

@@ -1,5 +1,0 @@
-set(XYMode_SRCS XYMode.cpp)
-qt4_automoc(${XYMode_SRCS})
-include_directories (${CMAKE_BINARY_DIR}/processing/XYMode)
-add_library(XYMode MODULE ${XYMode_SRCS})
-install(TARGETS XYMode DESTINATION share/osqoop/processing)

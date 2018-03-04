@@ -38,6 +38,7 @@ class SoundCardSystemSpecificData;
 class SoundCardDataSourceDescription : public QObject, public DataSourceDescription
 {
 	Q_OBJECT
+	Q_PLUGIN_METADATA(IID "ch.eig.lsn.Oscilloscope.DataSourceDescription/1.0" FILE "soundcard.json")
 	Q_INTERFACES(DataSourceDescription)
 
 public:
@@ -63,8 +64,9 @@ public:
 	
 	virtual unsigned inputCount() const;
 	virtual unsigned samplingRate() const;
-    virtual unsigned unitPerVoltCount() const;
+	virtual unsigned unitPerVoltCount() const;
 };
 
 
 #endif
+/* vim: set ts=8 sw=8 tw=0 noexpandtab cindent softtabstop=8 :*/

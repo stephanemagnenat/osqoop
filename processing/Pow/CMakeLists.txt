@@ -1,5 +1,0 @@
-set(Pow_SRCS Pow.cpp)
-qt4_automoc(${Pow_SRCS})
-include_directories (${CMAKE_BINARY_DIR}/processing/Pow)
-add_library(Pow MODULE ${Pow_SRCS})
-install(TARGETS Pow DESTINATION share/osqoop/processing)

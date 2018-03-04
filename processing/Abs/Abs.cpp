@@ -27,7 +27,6 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 #include <QtCore>
 #include "Abs.h"
-#include <Abs.moc>
 
 QString ProcessingAbsDescription::systemName() const
 {
@@ -73,4 +72,3 @@ void ProcessingAbs::processData(const std::valarray<signed short *> &inputs, con
 	}
 }
 
-Q_EXPORT_PLUGIN(ProcessingAbsDescription)

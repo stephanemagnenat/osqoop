@@ -32,7 +32,6 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #include <QtCore>
 #include <DataSource.h>
 #include "EMGEnvelope.h"
-#include <EMGEnvelope.moc>
 #include <IntegerRealValuedFFT.h>
 #include <BandPass2ndOrderFilter.h>
 #include <IIRFilter.h>
@@ -231,6 +230,3 @@ ProcessingEMGEnvelope::~ProcessingEMGEnvelope()
 	delete meanFilter;
 	delete lpFilter;
 }
-
-Q_EXPORT_PLUGIN(ProcessingEMGEnvelopeDescription)
-

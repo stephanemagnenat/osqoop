@@ -34,7 +34,6 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #include <QHBoxLayout>
 #include <DataSource.h>
 #include "Const.h"
-#include <Const.moc>
 
 QString ProcessingConstDescription::systemName() const
 {
@@ -127,5 +126,3 @@ void ProcessingConst::save(QTextStream *stream)
 {
 	(*stream) << value;
 }
-
-Q_EXPORT_PLUGIN(ProcessingConstDescription)

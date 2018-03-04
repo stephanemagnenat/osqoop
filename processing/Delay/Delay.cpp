@@ -30,7 +30,6 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #include <QtCore>
 #include <QSpinBox>
 #include "Delay.h"
-#include <Delay.moc>
 
 QString ProcessingDelayDescription::systemName() const
 {
@@ -117,5 +116,3 @@ void ProcessingDelay::save(QTextStream *stream)
 {
 	(*stream) << delay;
 }
-
-Q_EXPORT_PLUGIN(ProcessingDelayDescription)
