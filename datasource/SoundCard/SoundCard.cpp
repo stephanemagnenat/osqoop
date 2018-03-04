@@ -210,7 +210,7 @@ class SoundCardSystemSpecificData
 		// Read buffer
 		int ret = snd_pcm_readi(capture_handle, buffer, 512);
 		if (Q_UNLIKELY(ret < 0)) {
-			qWarning() << "Failed to prepare capture handle" << snd_strerror(ret);
+			qWarning() << "Failed to read from ALSA" << snd_strerror(ret);
 			return;
 		}
 
