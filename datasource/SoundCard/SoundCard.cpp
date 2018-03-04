@@ -34,7 +34,6 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #include <QLabel>
 #include <QMessageBox>
 #include "SoundCard.h"
-#include <SoundCard.moc>
 
 
 //! Dialog box for choosing sound input
@@ -62,6 +61,7 @@ public:
 // Unix specific
 
 #ifdef Q_OS_UNIX
+#ifdef USE_OSS
 	#include <fcntl.h>
 	#include <sys/ioctl.h>
 	#include <sys/soundcard.h>
@@ -71,6 +71,7 @@ public:
 	{
 	public:
 		int dspDev;
+		int rate = 44100;
 		
 		SoundCardSystemSpecificData() { dspDev = -1; }
 		
@@ -83,7 +84,6 @@ public:
 		bool openDevice()
 		{
 			// OSS, Open Sound System
-			int rate = 44100;
 			int channels = 2;
 			int format = AFMT_S16_NE;
 			
@@ -112,6 +112,118 @@ public:
 					(*data)[channel][sample] = buffer[sample * 2 + channel];    
 		}
 	};
+
+#else // USE_OSS
+
+extern "C" {
+#include <alsa/asoundlib.h>
+}
+
+class SoundCardSystemSpecificData
+{
+	signed short buffer[2 * 512];
+
+	snd_pcm_t *capture_handle = nullptr;
+	snd_pcm_hw_params_t *hw_params = nullptr;
+
+	public:
+	uint32_t rate = 44100;
+
+	~SoundCardSystemSpecificData()
+	{
+		if (capture_handle) {
+			snd_pcm_close(capture_handle);
+			capture_handle = nullptr;
+		}
+		if (hw_params) {
+			snd_pcm_hw_params_free (hw_params);
+			hw_params = nullptr;
+		}
+	}
+
+	bool openDevice()
+	{
+		// ALSA, advanced linux sound architecture
+
+		int ret = snd_pcm_open (&capture_handle, "default", SND_PCM_STREAM_CAPTURE, 0);
+		if (ret < 0) {
+			qWarning() << "Failed to open capture device" << snd_strerror(ret);
+			return false;
+		}
+
+		ret = snd_pcm_hw_params_malloc(&hw_params);
+		if (ret < 0 || !hw_params) {
+			qWarning() << "Failed to allocate hw params" << snd_strerror(ret);
+			return false;
+		}
+
+		ret = snd_pcm_hw_params_any(capture_handle, hw_params);
+		if (ret < 0) {
+			qWarning() << "Failed to set default hw params" << snd_strerror(ret);
+			return false;
+		}
+
+		ret = snd_pcm_hw_params_set_access(capture_handle, hw_params, SND_PCM_ACCESS_RW_INTERLEAVED);
+		if (ret < 0) {
+			qWarning() << "Failed to set interleaved access" << snd_strerror(ret);
+			return false;
+		}
+
+		ret = snd_pcm_hw_params_set_format (capture_handle, hw_params, SND_PCM_FORMAT_S16_LE);
+		if (ret < 0) {
+			qWarning() << "Failed to set capture format" << snd_strerror(ret);
+			return false;
+		}
+
+		ret = snd_pcm_hw_params_set_rate_near (capture_handle, hw_params, &rate, 0);
+		if (ret < 0) {
+			qWarning() << "Failed to set rate" << snd_strerror(ret);
+			return false;
+		}
+
+		ret = snd_pcm_hw_params_set_channels (capture_handle, hw_params, 2);
+		if (ret < 0) {
+			qWarning() << "Failed to set channels" << snd_strerror(ret);
+			return false;
+		}
+
+		ret = snd_pcm_hw_params (capture_handle, hw_params);
+		if (ret < 0) {
+			qWarning() << "Failed to set hardware parameters" << snd_strerror(ret);
+			return false;
+		}
+
+		snd_pcm_hw_params_free (hw_params);
+		hw_params = nullptr;
+
+		ret = snd_pcm_prepare(capture_handle);
+		if (ret < 0) {
+			qWarning() << "Failed to prepare capture handle" << snd_strerror(ret);
+			return false;
+		}
+
+		return true;
+	}
+
+	void getRawData(std::valarray<std::valarray<signed short> > *data)
+	{
+		// Read buffer
+		int ret = snd_pcm_readi(capture_handle, buffer, 512);
+		if (Q_UNLIKELY(ret < 0)) {
+			qWarning() << "Failed to read from ALSA" << snd_strerror(ret);
+			return;
+		}
+
+		// Deinterlace buffer 
+		for (size_t sample = 0; sample < 512; sample++) {
+			for (size_t channel = 0; channel < 2; channel++) {
+				(*data)[channel][sample] = buffer[sample * 2 + channel];
+			}
+		}
+	}
+};
+
+#endif // USE_OSS
 #endif // Q_OS_UNIX
 	
 	
@@ -137,6 +249,7 @@ public:
 	class SoundCardSystemSpecificData
 	{
 	public:
+		int rate = 44100;
 		HWAVEIN waveIn;
 		HANDLE event;
 		enum
@@ -298,7 +411,7 @@ unsigned SoundCardDataSource::inputCount() const
 
 unsigned SoundCardDataSource::samplingRate() const
 {
-	return 44100;
+	return privateData->rate;
 }
 
 unsigned SoundCardDataSource::unitPerVoltCount() const
@@ -306,5 +419,4 @@ unsigned SoundCardDataSource::unitPerVoltCount() const
 	return 10000;
 }
 
-
-Q_EXPORT_PLUGIN(SoundCardDataSourceDescription)
+/* vim: set ts=8 sw=8 tw=0 noexpandtab cindent softtabstop=8 :*/

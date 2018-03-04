@@ -1,5 +1,0 @@
-set(Sum_SRCS Sum.cpp)
-qt4_automoc(${Sum_SRCS})
-include_directories (${CMAKE_BINARY_DIR}/processing/Sum)
-add_library(Sum MODULE ${Sum_SRCS})
-install(TARGETS Sum DESTINATION share/osqoop/processing)

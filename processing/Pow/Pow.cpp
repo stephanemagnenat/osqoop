@@ -30,7 +30,6 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #include <QtCore>
 #include <QDoubleSpinBox>
 #include "Pow.h"
-#include <Pow.moc>
 
 QString ProcessingPowDescription::systemName() const
 {
@@ -104,5 +103,3 @@ void ProcessingPow::save(QTextStream *stream)
 {
 	(*stream) << exponent;
 }
-
-Q_EXPORT_PLUGIN(ProcessingPowDescription)

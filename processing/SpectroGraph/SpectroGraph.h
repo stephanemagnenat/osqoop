@@ -51,6 +51,7 @@ enum {Power, Phase};
 class ProcessingSpectroGraphDescription : public QObject, public ProcessingPluginDescription
 {
 	Q_OBJECT
+	Q_PLUGIN_METADATA(IID "ch.eig.lsn.Oscilloscope.ProcessingPluginDescription/1.0" FILE "spectrograph.json")
 	Q_INTERFACES(ProcessingPluginDescription)
 
 public:
@@ -153,3 +154,4 @@ private:
 
 
 #endif
+/* vim: set ts=8 sw=8 tw=0 noexpandtab cindent softtabstop=8 :*/

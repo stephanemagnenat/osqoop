@@ -1,6 +1,0 @@
-set(IIR2ndOrderFilter_SRCS IIR2ndOrderFilter.cpp)
-qt4_automoc(${IIR2ndOrderFilter_SRCS})
-include_directories (${CMAKE_BINARY_DIR}/processing/IIR2ndOrderFilter)
-add_library(IIR2ndOrderFilter MODULE ${IIR2ndOrderFilter_SRCS})
-target_link_libraries(IIR2ndOrderFilter processing)
-install(TARGETS IIR2ndOrderFilter DESTINATION share/osqoop/processing)

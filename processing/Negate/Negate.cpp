@@ -27,7 +27,6 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 #include <QtCore>
 #include "Negate.h"
-#include <Negate.moc>
 
 QString ProcessingNegateDescription::systemName() const
 {
@@ -66,5 +65,3 @@ void ProcessingNegate::processData(const std::valarray<signed short *> &inputs, 
 	for (unsigned sample = 0; sample < sampleCount; sample++)
 		*destPtr++ = - (*srcPtr++);
 }
-
-Q_EXPORT_PLUGIN(ProcessingNegateDescription)

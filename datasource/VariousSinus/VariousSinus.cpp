@@ -29,7 +29,6 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 #include <QtCore>
 #include "VariousSinus.h"
-#include <VariousSinus.moc>
 
 QString VariousSinusDataSourceDescription::name() const
 {
@@ -82,5 +81,3 @@ unsigned VariousSinusDataSource::unitPerVoltCount() const
 {
     return 1000;
 }
-
-Q_EXPORT_PLUGIN(VariousSinusDataSourceDescription)

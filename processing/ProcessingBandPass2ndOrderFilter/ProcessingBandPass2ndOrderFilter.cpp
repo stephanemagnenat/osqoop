@@ -29,7 +29,6 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 #include <BandPass2ndOrderFilter.h>
 #include "ProcessingBandPass2ndOrderFilter.h"
-#include <ProcessingBandPass2ndOrderFilter.moc>
 #include <DataSource.h>
 #include <QDoubleSpinBox>
 #include <QGridLayout>
@@ -154,4 +153,3 @@ void ProcessingBandPass2ndOrderFilter::save(QTextStream *stream)
 	(*stream) << filter->cutOffFreq() << " " << filter->bandWidth();
 }
 
-Q_EXPORT_PLUGIN(ProcessingBandPass2ndOrderFilterDescription)

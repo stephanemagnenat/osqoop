@@ -29,8 +29,9 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 #include <QtCore>
 #include <QDoubleSpinBox>
+#include <QGridLayout>
+#include <QLabel>
 #include "XYMode.h"
-#include <XYMode.moc>
 #include <stdio.h>
 
 
@@ -257,5 +258,3 @@ void XYModeGUI::paintEvent(QPaintEvent *event) {
 	}
 }
 
-
-Q_EXPORT_PLUGIN(ProcessingXYModeDescription)

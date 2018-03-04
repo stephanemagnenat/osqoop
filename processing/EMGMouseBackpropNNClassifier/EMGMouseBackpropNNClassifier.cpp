@@ -32,7 +32,6 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #include <QBoxLayout>
 #include <DataSource.h>
 #include "EMGMouseBackpropNNClassifier.h"
-#include <EMGMouseBackpropNNClassifier.moc>
 #include <FeedForwardNeuralNetwork.h>
 #include <fstream>
 
@@ -502,5 +501,3 @@ ProcessingEMGMouseBackpropNNClassifier::~ProcessingEMGMouseBackpropNNClassifier(
 {
 	delete nn;
 }
-
-Q_EXPORT_PLUGIN(ProcessingEMGMouseBackpropNNClassifierDescription)
